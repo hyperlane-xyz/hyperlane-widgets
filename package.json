@@ -1,0 +1,48 @@
+{
+  "name": "@hyperlane-xyz/widgets",
+  "description": "Common react components for projects using Hyperlane",
+  "version": "1.0.0-beta1",
+  "peerDependencies": {
+    "@hyperlane-xyz/sdk": "1.0.0",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@hyperlane-xyz/sdk": "1.0.0",
+    "@trivago/prettier-plugin-sort-imports": "^3.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "@typescript-eslint/parser": "^5.27.0",
+    "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
+    "prettier": "^2.4.1",
+    "react": "^18",
+    "react-dom": "^18",
+    "ts-node": "^10.8.0",
+    "typescript": "^4.7.2"
+  },
+  "files": [
+    "/dist"
+  ],
+  "homepage": "https://www.hyperlane.xyz",
+  "keywords": [
+    "Hyperlane",
+    "Widgets",
+    "React",
+    "Components",
+    "Typescript"
+  ],
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "packageManager": "yarn@3.2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hyperlane-xyz/hyperlane-widgets"
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist cache",
+    "lint": "eslint . --ext .ts",
+    "prettier": "prettier --write ./src"
+  },
+  "types": "dist/index.d.ts"
+}
