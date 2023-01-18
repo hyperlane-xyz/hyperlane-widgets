@@ -1,26 +1,20 @@
-# Hyperlane 'Hello World' App Template
+# Hyperlane Widgets
 
-A basic Hyperlane application with a router contract that can dispatch messages.
+Common react components for projects using Hyperlane.
 
-## Setup
-
-```sh
-# Install dependencies
-yarn
-
-# Build source and generate types
-yarn build
-```
-
-## Test
+## Installation
 
 ```sh
-# Run all unit tests
-yarn test
+# Install with npm
+npm install @hyperlane-xyz/widgets
 
-# Lint check code
-yarn lint
+# Install with yarn
+yarn add @hyperlane-xyz/widgets
 ```
+
+### Peer dependencies
+
+This package requires the `@hyperlane-xyz/sdk`, `react`, and `react-dom`.
 
 ## Learn more
 
