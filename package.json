@@ -1,6 +1,6 @@
 {
   "name": "@hyperlane-xyz/widgets",
-  "description": "Common react components for projects using Hyperlane",
+  "description": "Common react components for Hyperlane projects",
   "version": "1.0.0-beta1",
   "peerDependencies": {
     "@hyperlane-xyz/sdk": "1.0.0",
@@ -10,13 +10,17 @@
   "devDependencies": {
     "@hyperlane-xyz/sdk": "1.0.0",
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
+    "@types/node": "^18.11.18",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
     "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.5.0",
     "prettier": "^2.4.1",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^3.2.4",
     "ts-node": "^10.8.0",
     "typescript": "^4.7.2"
   },
@@ -39,7 +43,9 @@
     "url": "https://github.com/hyperlane-xyz/hyperlane-widgets"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "yarn build:ts && yarn build:css",
+    "build:ts": "tsc",
+    "build:css": "tailwindcss -i ./src/styles/styles.css -o ./dist/styles/styles.css --minify",
     "clean": "rm -rf dist cache",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --write ./src"

@@ -1,1 +1,4 @@
-export { StatusTimeline } from './messages/StatusTimeline';
+export { ChainLogo } from './icons/ChainLogo';
+export { WideChevron } from './icons/WideChevron';
+export { MessageTimeline } from './messages/MessageTimeline';
+export { useMessageStage } from './messages/useMessageState';

@@ -1,5 +1,4 @@
 node_modules
 dist
 coverage
-src/types
-hardhat.config.ts
+tailwind.config.js

@@ -14,7 +14,7 @@ yarn add @hyperlane-xyz/widgets
 
 ### Peer dependencies
 
-This package requires the `@hyperlane-xyz/sdk`, `react`, and `react-dom`.
+This package requires `@hyperlane-xyz/sdk`, `react`, and `react-dom`.
 
 ## Learn more
 
