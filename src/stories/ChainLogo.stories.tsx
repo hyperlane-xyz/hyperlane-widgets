@@ -3,13 +3,11 @@ import React from 'react';
 
 import { ChainLogo } from '../icons/ChainLogo';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'ChainLogo',
   component: ChainLogo,
 } as ComponentMeta<typeof ChainLogo>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof ChainLogo> = (args) => <ChainLogo {...args} />;
 
 export const ColorChain = Template.bind({});

@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import { Color } from '../color';
 
-interface Props {
+export interface WideChevronProps {
   width?: string | number;
   height?: string | number;
   direction: 'n' | 'e' | 's' | 'w';
@@ -11,7 +11,7 @@ interface Props {
   classes?: string;
 }
 
-function _WideChevron({ width, height, direction, color, rounded, classes }: Props) {
+function _WideChevron({ width, height, direction, color, rounded, classes }: WideChevronProps) {
   let directionClass;
   switch (direction) {
     case 'n':
