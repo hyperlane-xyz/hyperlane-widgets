@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Color } from '../color';
 import { AirplaneIcon } from '../icons/Airplane';
 import { EnvelopeIcon } from '../icons/Envelope';
 import { LockIcon } from '../icons/Lock';
@@ -142,7 +143,7 @@ export function MessageTimeline({ message, resolvedStatus: status, resolvedDesti
 function StageIcon({ Icon, size }: { Icon: any; size?: number }) {
   return (
     <div className="h-9 w-9 flex items-center justify-center rounded-full bg-blue-500">
-      <Icon width={size ?? 14} height={size ?? 14} alt="" />
+      <Icon width={size ?? 14} height={size ?? 14} alt="" color={Color.White} />
     </div>
   );
 }
