@@ -60,14 +60,14 @@ const CHAIN_TO_COLOR_ICON = {
   [chainMetadata.polygon.id]: PolygonColor,
 };
 
-interface Props {
+export interface ChainLogoProps {
   chainId?: number;
   size?: number;
   color?: boolean;
   background?: boolean;
 }
 
-function _ChainLogo({ chainId, size = 32, color = true, background = false }: Props) {
+function _ChainLogo({ chainId, size = 32, color = true, background = false }: ChainLogoProps) {
   const iconSet = color ? CHAIN_TO_COLOR_ICON : CHAIN_TO_MONOCHROME_ICON;
   const hasIcon = !!(chainId && iconSet[chainId]);
   const imageSrc = hasIcon ? iconSet[chainId] : '';

@@ -2,3 +2,5 @@ node_modules
 dist
 coverage
 tailwind.config.js
+postcss.config.js
+src/stories/**/*.stories.tsx

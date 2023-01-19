@@ -5,6 +5,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": false,
+    "isolatedModules": true,
     "jsx": "react",
     "lib": ["es2020", "dom"],
     "module": "commonjs",
@@ -25,6 +26,7 @@
     "target": "es6",
   },
   "include": ["./src/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.stories.tsx"],
   "ts-node": {
     "compilerOptions": {
       "module": "commonjs"

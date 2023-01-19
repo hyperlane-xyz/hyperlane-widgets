@@ -8,15 +8,29 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@babel/core": "^7.20.12",
     "@hyperlane-xyz/sdk": "1.0.0",
+    "@mdx-js/react": "^1.6.22",
+    "@storybook/addon-actions": "^6.5.15",
+    "@storybook/addon-docs": "^6.5.15",
+    "@storybook/addon-essentials": "^6.5.15",
+    "@storybook/addon-interactions": "^6.5.15",
+    "@storybook/addon-links": "^6.5.15",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/builder-webpack4": "^6.5.15",
+    "@storybook/manager-webpack4": "^6.5.15",
+    "@storybook/react": "^6.5.15",
+    "@storybook/testing-library": "^0.0.13",
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
+    "babel-loader": "^8.3.0",
     "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.5.0",
+    "postcss": "^8.4.21",
     "prettier": "^2.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -27,6 +41,8 @@
   "files": [
     "/dist"
   ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "homepage": "https://www.hyperlane.xyz",
   "keywords": [
     "Hyperlane",
@@ -36,7 +52,6 @@
     "Typescript"
   ],
   "license": "Apache-2.0",
-  "main": "dist/index.js",
   "packageManager": "yarn@3.2.0",
   "repository": {
     "type": "git",
@@ -48,7 +63,8 @@
     "build:css": "tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",
     "clean": "rm -rf dist cache",
     "lint": "eslint . --ext .ts",
-    "prettier": "prettier --write ./src"
-  },
-  "types": "dist/index.d.ts"
+    "prettier": "prettier --write ./src",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  }
 }
