@@ -1,14 +1,14 @@
 import React, { memo } from 'react';
 
 import { chainIdToMetadata, chainMetadata } from '@hyperlane-xyz/sdk';
-import ArbitrumMono from '@hyperlane-xyz/sdk/logos/black/arbitrum.svg';
-import AvalancheMono from '@hyperlane-xyz/sdk/logos/black/avalanche.svg';
-import BscMono from '@hyperlane-xyz/sdk/logos/black/bsc.svg';
-import CeloMono from '@hyperlane-xyz/sdk/logos/black/celo.svg';
-import EthereumMono from '@hyperlane-xyz/sdk/logos/black/ethereum.svg';
-import MoonbeamMono from '@hyperlane-xyz/sdk/logos/black/moonbeam.svg';
-import OptimismMono from '@hyperlane-xyz/sdk/logos/black/optimism.svg';
-import PolygonMono from '@hyperlane-xyz/sdk/logos/black/polygon.svg';
+import ArbitrumBlack from '@hyperlane-xyz/sdk/logos/black/arbitrum.svg';
+import AvalancheBlack from '@hyperlane-xyz/sdk/logos/black/avalanche.svg';
+import BscBlack from '@hyperlane-xyz/sdk/logos/black/bsc.svg';
+import CeloBlack from '@hyperlane-xyz/sdk/logos/black/celo.svg';
+import EthereumBlack from '@hyperlane-xyz/sdk/logos/black/ethereum.svg';
+import MoonbeamBlack from '@hyperlane-xyz/sdk/logos/black/moonbeam.svg';
+import OptimismBlack from '@hyperlane-xyz/sdk/logos/black/optimism.svg';
+import PolygonBlack from '@hyperlane-xyz/sdk/logos/black/polygon.svg';
 import ArbitrumColor from '@hyperlane-xyz/sdk/logos/color/arbitrum.svg';
 import AvalancheColor from '@hyperlane-xyz/sdk/logos/color/avalanche.svg';
 import BscColor from '@hyperlane-xyz/sdk/logos/color/bsc.svg';
@@ -22,42 +22,23 @@ import { QuestionMarkIcon } from './QuestionMark';
 
 // Keep up to date as new chains are added or
 // icon will fallback to default (question mark)
-const CHAIN_TO_MONOCHROME_ICON = {
-  [chainMetadata.alfajores.id]: CeloMono,
-  [chainMetadata.arbitrum.id]: ArbitrumMono,
-  [chainMetadata.arbitrumgoerli.id]: ArbitrumMono,
-  [chainMetadata.avalanche.id]: AvalancheMono,
-  [chainMetadata.bsc.id]: BscMono,
-  [chainMetadata.bsctestnet.id]: BscMono,
-  [chainMetadata.celo.id]: CeloMono,
-  [chainMetadata.ethereum.id]: EthereumMono,
-  [chainMetadata.fuji.id]: AvalancheMono,
-  [chainMetadata.goerli.id]: EthereumMono,
-  [chainMetadata.moonbasealpha.id]: MoonbeamMono,
-  [chainMetadata.moonbeam.id]: MoonbeamMono,
-  [chainMetadata.mumbai.id]: PolygonMono,
-  [chainMetadata.optimism.id]: OptimismMono,
-  [chainMetadata.optimismgoerli.id]: OptimismMono,
-  [chainMetadata.polygon.id]: PolygonMono,
-};
-
-const CHAIN_TO_COLOR_ICON = {
-  [chainMetadata.alfajores.id]: CeloColor,
-  [chainMetadata.arbitrum.id]: ArbitrumColor,
-  [chainMetadata.arbitrumgoerli.id]: ArbitrumColor,
-  [chainMetadata.avalanche.id]: AvalancheColor,
-  [chainMetadata.bsc.id]: BscColor,
-  [chainMetadata.bsctestnet.id]: BscColor,
-  [chainMetadata.celo.id]: CeloColor,
-  [chainMetadata.ethereum.id]: EthereumColor,
-  [chainMetadata.fuji.id]: AvalancheColor,
-  [chainMetadata.goerli.id]: EthereumColor,
-  [chainMetadata.moonbasealpha.id]: MoonbeamColor,
-  [chainMetadata.moonbeam.id]: MoonbeamColor,
-  [chainMetadata.mumbai.id]: PolygonColor,
-  [chainMetadata.optimism.id]: OptimismColor,
-  [chainMetadata.optimismgoerli.id]: OptimismColor,
-  [chainMetadata.polygon.id]: PolygonColor,
+const CHAIN_TO_LOGO = {
+  [chainMetadata.alfajores.id]: { black: CeloBlack, color: CeloColor },
+  [chainMetadata.arbitrum.id]: { black: ArbitrumBlack, color: ArbitrumColor },
+  [chainMetadata.arbitrumgoerli.id]: { black: ArbitrumBlack, color: ArbitrumColor },
+  [chainMetadata.avalanche.id]: { black: AvalancheBlack, color: AvalancheColor },
+  [chainMetadata.bsc.id]: { black: BscBlack, color: BscColor },
+  [chainMetadata.bsctestnet.id]: { black: BscBlack, color: BscColor },
+  [chainMetadata.celo.id]: { black: CeloBlack, color: CeloColor },
+  [chainMetadata.ethereum.id]: { black: EthereumBlack, color: EthereumColor },
+  [chainMetadata.fuji.id]: { black: AvalancheBlack, color: AvalancheColor },
+  [chainMetadata.goerli.id]: { black: EthereumBlack, color: EthereumColor },
+  [chainMetadata.moonbasealpha.id]: { black: MoonbeamBlack, color: MoonbeamColor },
+  [chainMetadata.moonbeam.id]: { black: MoonbeamBlack, color: MoonbeamColor },
+  [chainMetadata.mumbai.id]: { black: PolygonBlack, color: PolygonColor },
+  [chainMetadata.optimism.id]: { black: OptimismBlack, color: OptimismColor },
+  [chainMetadata.optimismgoerli.id]: { black: OptimismBlack, color: OptimismColor },
+  [chainMetadata.polygon.id]: { black: PolygonBlack, color: PolygonColor },
 };
 
 export interface ChainLogoProps {
@@ -65,12 +46,21 @@ export interface ChainLogoProps {
   size?: number;
   color?: boolean;
   background?: boolean;
+  customLogos?: Record<number, { color: any; black: any }>;
 }
 
-function _ChainLogo({ chainId, size = 32, color = true, background = false }: ChainLogoProps) {
-  const iconSet = color ? CHAIN_TO_COLOR_ICON : CHAIN_TO_MONOCHROME_ICON;
-  const hasIcon = !!(chainId && iconSet[chainId]);
-  const imageSrc = hasIcon ? iconSet[chainId] : '';
+function _ChainLogo({
+  chainId,
+  size = 32,
+  color = true,
+  background = false,
+  customLogos = {},
+}: ChainLogoProps) {
+  const colorType = color ? 'color' : 'black';
+  const imageSrc = chainId
+    ? customLogos[chainId]?.[colorType] || CHAIN_TO_LOGO[chainId]?.[colorType]
+    : '';
+  const hasIcon = !!imageSrc;
   const title = getChainDisplayName(chainId);
 
   if (background) {
