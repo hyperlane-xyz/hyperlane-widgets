@@ -22,6 +22,7 @@
     "@storybook/manager-webpack4": "^6.5.15",
     "@storybook/react": "^6.5.15",
     "@storybook/testing-library": "^0.0.13",
+    "@svgr/cli": "^6.5.1",
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.27",
@@ -66,10 +67,11 @@
     "url": "https://github.com/hyperlane-xyz/hyperlane-widgets"
   },
   "scripts": {
-    "build": "yarn build:cjs && yarn build:esm && yarn build:css",
+    "build": "yarn build:svg && yarn build:cjs && yarn build:esm && yarn build:css",
     "build:cjs": "tsc --project ./tsconfig.json",
     "build:esm": "tsc --project ./tsconfig.esm.json",
     "build:css": "tailwindcss -c ./tailwind.config.js -i ./src/styles.css -o ./dist/styles.css --minify",
+    "build:svg": "svgr --typescript --out-dir src/logos -- node_modules/@hyperlane-xyz/sdk/logos",
     "clean": "rm -rf dist cache",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --write ./src",

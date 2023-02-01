@@ -2,6 +2,8 @@ export { Color } from './color';
 export * from './consts';
 export { ChainLogo } from './icons/ChainLogo';
 export { WideChevron } from './icons/WideChevron';
+export * as BlackLogos from './logos/black';
+export * as ColorLogos from './logos/color';
 export { MessageTimeline } from './messages/MessageTimeline';
 export { MessageStage, MessageStatus, type ApiMessage, type StageTimings } from './messages/types';
 export { useMessage } from './messages/useMessage';

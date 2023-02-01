@@ -1,22 +1,23 @@
 import React, { memo } from 'react';
 
 import { chainIdToMetadata, chainMetadata } from '@hyperlane-xyz/sdk';
-import ArbitrumBlack from '@hyperlane-xyz/sdk/logos/black/arbitrum.svg';
-import AvalancheBlack from '@hyperlane-xyz/sdk/logos/black/avalanche.svg';
-import BscBlack from '@hyperlane-xyz/sdk/logos/black/bsc.svg';
-import CeloBlack from '@hyperlane-xyz/sdk/logos/black/celo.svg';
-import EthereumBlack from '@hyperlane-xyz/sdk/logos/black/ethereum.svg';
-import MoonbeamBlack from '@hyperlane-xyz/sdk/logos/black/moonbeam.svg';
-import OptimismBlack from '@hyperlane-xyz/sdk/logos/black/optimism.svg';
-import PolygonBlack from '@hyperlane-xyz/sdk/logos/black/polygon.svg';
-import ArbitrumColor from '@hyperlane-xyz/sdk/logos/color/arbitrum.svg';
-import AvalancheColor from '@hyperlane-xyz/sdk/logos/color/avalanche.svg';
-import BscColor from '@hyperlane-xyz/sdk/logos/color/bsc.svg';
-import CeloColor from '@hyperlane-xyz/sdk/logos/color/celo.svg';
-import EthereumColor from '@hyperlane-xyz/sdk/logos/color/ethereum.svg';
-import MoonbeamColor from '@hyperlane-xyz/sdk/logos/color/moonbeam.svg';
-import OptimismColor from '@hyperlane-xyz/sdk/logos/color/optimism.svg';
-import PolygonColor from '@hyperlane-xyz/sdk/logos/color/polygon.svg';
+
+import ArbitrumBlack from '../logos/black/Arbitrum';
+import AvalancheBlack from '../logos/black/Avalanche';
+import BscBlack from '../logos/black/Bsc';
+import CeloBlack from '../logos/black/Celo';
+import EthereumBlack from '../logos/black/Ethereum';
+import MoonbeamBlack from '../logos/black/Moonbeam';
+import OptimismBlack from '../logos/black/Optimism';
+import PolygonBlack from '../logos/black/Polygon';
+import ArbitrumColor from '../logos/color/Arbitrum';
+import AvalancheColor from '../logos/color/Avalanche';
+import BscColor from '../logos/color/Bsc';
+import CeloColor from '../logos/color/Celo';
+import EthereumColor from '../logos/color/Ethereum';
+import MoonbeamColor from '../logos/color/Moonbeam';
+import OptimismColor from '../logos/color/Optimism';
+import PolygonColor from '../logos/color/Polygon';
 
 import { QuestionMarkIcon } from './QuestionMark';
 
@@ -41,12 +42,14 @@ const CHAIN_TO_LOGO = {
   [chainMetadata.polygon.id]: { black: PolygonBlack, color: PolygonColor },
 };
 
+type CustomLogo = (props: { width: number; height: number; title?: string }) => React.ReactElement;
+
 export interface ChainLogoProps {
   chainId?: number;
   size?: number;
   color?: boolean;
   background?: boolean;
-  customLogos?: Record<number, { color: any; black: any }>;
+  customLogos?: Record<number, { color: CustomLogo; black: CustomLogo }>;
 }
 
 function _ChainLogo({
@@ -57,10 +60,9 @@ function _ChainLogo({
   customLogos = {},
 }: ChainLogoProps) {
   const colorType = color ? 'color' : 'black';
-  const imageSrc = chainId
+  const ImageSrc = chainId
     ? customLogos[chainId]?.[colorType] || CHAIN_TO_LOGO[chainId]?.[colorType]
-    : '';
-  const hasIcon = !!imageSrc;
+    : null;
   const title = getChainDisplayName(chainId);
 
   if (background) {
@@ -71,15 +73,15 @@ function _ChainLogo({
         className="flex items-center justify-center rounded-full bg-gray-100 transition-all"
         title={title}
       >
-        {hasIcon ? (
-          <img src={imageSrc} alt="" width={iconSize} height={iconSize} />
+        {ImageSrc ? (
+          <ImageSrc width={iconSize} height={iconSize} />
         ) : (
           <QuestionMarkIcon width={iconSize} height={iconSize} />
         )}
       </div>
     );
-  } else if (hasIcon) {
-    return <img src={imageSrc} alt="" width={size} height={size} title={title} />;
+  } else if (ImageSrc) {
+    return <ImageSrc width={size} height={size} title={title} />;
   } else {
     return <QuestionMarkIcon width={size} height={size} />;
   }
