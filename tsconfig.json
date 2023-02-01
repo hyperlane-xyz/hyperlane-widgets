@@ -1,35 +1,11 @@
 {
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "declaration": true,
-    "declarationMap": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "incremental": false,
-    "isolatedModules": true,
-    "jsx": "react",
-    "lib": ["es2020", "dom"],
     "module": "commonjs",
     "moduleResolution": "node",
-    "noEmitOnError": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": false,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "outDir": "./dist",
-    "preserveSymlinks": true,
-    "preserveWatchOutput": true,
-    "pretty": false,
-    "resolveJsonModule": true,
-    "rootDir": "./src",
-    "sourceMap": true,
-    "strict": true,
-    "target": "es6",
+    "outDir": "./dist/cjs",
   },
   "include": ["./src/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.stories.tsx"],
-  "ts-node": {
-    "compilerOptions": {
-      "module": "commonjs"
-    }
-  }
+  "exclude": ["node_modules", "dist", "**/*.stories.tsx"]
 }

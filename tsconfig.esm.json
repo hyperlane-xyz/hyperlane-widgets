@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "module": "es2020",
+    "moduleResolution": "node",
+    "outDir": "./dist/esm",
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.stories.tsx"],
+}
