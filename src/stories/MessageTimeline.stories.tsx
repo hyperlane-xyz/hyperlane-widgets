@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import { MessageTimeline } from '../messages/MessageTimeline';
+import { MessageStage, MessageStatus } from '../messages/types';
 
 export default {
   title: 'MessageTimeline',
@@ -10,7 +11,49 @@ export default {
 
 const Template: ComponentStory<typeof MessageTimeline> = (args) => <MessageTimeline {...args} />;
 
-export const Timeline1 = Template.bind({});
-Timeline1.args = {
-  // TODO
+const defaultTimings = {
+  [MessageStage.Finalized]: 10,
+  [MessageStage.Validated]: 5,
+  [MessageStage.Relayed]: 8,
+};
+const defaultTimeSent = Date.now() - 10_000;
+
+export const TimelinePreparing = Template.bind({});
+TimelinePreparing.args = {
+  status: MessageStatus.Pending,
+  stage: MessageStage.Preparing,
+  timings: {},
+  timestampSent: undefined,
+};
+
+export const TimelineOriginSent = Template.bind({});
+TimelineOriginSent.args = {
+  status: MessageStatus.Pending,
+  stage: MessageStage.Sent,
+  timings: defaultTimings,
+  timestampSent: defaultTimeSent,
+};
+
+export const TimelineOriginFinalized = Template.bind({});
+TimelineOriginFinalized.args = {
+  status: MessageStatus.Pending,
+  stage: MessageStage.Finalized,
+  timings: defaultTimings,
+  timestampSent: defaultTimeSent,
+};
+
+export const TimelineOriginValidated = Template.bind({});
+TimelineOriginValidated.args = {
+  status: MessageStatus.Pending,
+  stage: MessageStage.Validated,
+  timings: defaultTimings,
+  timestampSent: defaultTimeSent,
+};
+
+export const TimelineOriginDelivered = Template.bind({});
+TimelineOriginDelivered.args = {
+  status: MessageStatus.Delivered,
+  stage: MessageStage.Preparing,
+  timings: defaultTimings,
+  timestampSent: defaultTimeSent,
 };

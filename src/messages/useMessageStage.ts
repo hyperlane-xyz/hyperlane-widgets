@@ -1,94 +1,70 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { chainIdToMetadata } from '@hyperlane-xyz/sdk';
 
 import { queryExplorerForBlock } from '../utils/explorers';
 import { fetchWithTimeout } from '../utils/timeout';
+import { useInterval } from '../utils/useInterval';
 
-import { MessageStatus } from './types';
+import { MessageStatus, PartialMessage, MessageStage as Stage, StageTimings } from './types';
 
 const VALIDATION_TIME_EST = 5;
 
-export enum Stage {
-  Sent = 0,
-  Finalized = 1,
-  Validated = 2,
-  Relayed = 3,
+interface Params {
+  message: PartialMessage | null | undefined;
+  retryInterval?: number;
 }
 
-export function useMessageStage(
-  status: MessageStatus,
-  nonce: number,
-  originChainId: number,
-  destChainId: number,
-  originBlockNumber: number,
-  originTimestamp: number,
-  destinationTimestamp?: number,
-) {
+export function useMessageStage({ message, retryInterval = 2000 }: Params) {
   // Tempting to use react-query here as we did in Explorer but
   // avoiding for now to keep dependencies for this lib minimal
 
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [data, setData] = useState<any | null>(null); //TODO
+  const [data, setData] = useState<{ stage: Stage; timings: StageTimings } | null>(null);
 
-  useEffect(() => {
+  const fetcher = useCallback(() => {
+    if (!message) return;
     setIsLoading(true);
-    fetchMessageState(
-      status,
-      nonce,
-      originChainId,
-      destChainId,
-      originBlockNumber,
-      originTimestamp,
-      destinationTimestamp,
-    )
+    fetchMessageState(message)
       .then((result) => {
         setData(result);
         setError(null);
       })
       .catch((e) => setError(e.toString()))
       .finally(() => setIsLoading(false));
-  }, [
-    status,
-    nonce,
-    originChainId,
-    destChainId,
-    originTimestamp,
-    destinationTimestamp,
-    originBlockNumber,
-  ]);
+  }, [message]);
+
+  useInterval(fetcher, retryInterval);
 
   return {
-    stage: data?.stage || Stage.Sent,
+    stage: data?.stage || message ? Stage.Sent : Stage.Preparing,
     timings: data?.timings || {},
     isLoading,
     error,
   };
 }
 
-async function fetchMessageState(
-  status: MessageStatus,
-  nonce: number,
-  originChainId: number,
-  destChainId: number,
-  originBlockNumber: number,
-  originTimestamp: number,
-  destinationTimestamp?: number,
-) {
-  if (!originChainId || !destChainId || !nonce || !originTimestamp || !originBlockNumber) {
-    return null;
-  }
+async function fetchMessageState(message: PartialMessage) {
+  const {
+    status,
+    nonce,
+    originDomainId: originChainId, // TODO avoid assuming domain === chain
+    destinationDomainId: destChainId,
+    originTransaction,
+    destinationTransaction,
+  } = message;
+  const { blockNumber: originBlockNumber, timestamp: originTimestamp } = originTransaction;
+  const destTimestamp = destinationTransaction?.timestamp;
 
-  const relayEstimate = Math.floor(chainIdToMetadata[destChainId].blocks.estimateBlockTime * 1.5);
+  const relayEstimate = Math.floor(getBlockTimeEst(destChainId) * 1.5);
   const finalityBlocks = getFinalityBlocks(originChainId);
-  const finalityEstimate =
-    finalityBlocks * (chainIdToMetadata[originChainId].blocks.estimateBlockTime || 3);
+  const finalityEstimate = finalityBlocks * getBlockTimeEst(originChainId);
 
-  if (status === MessageStatus.Delivered && destinationTimestamp) {
+  if (status === MessageStatus.Delivered && destTimestamp) {
     // For delivered messages, just to rough estimates for stages
     // This saves us from making extra explorer calls. May want to revisit in future
-    const totalDuration = Math.round((destinationTimestamp - originTimestamp) / 1000);
+    const totalDuration = Math.round((destTimestamp - originTimestamp) / 1000);
     const finalityDuration = Math.max(
       Math.min(finalityEstimate, totalDuration - VALIDATION_TIME_EST),
       1,
@@ -102,9 +78,9 @@ async function fetchMessageState(
     return {
       stage: Stage.Relayed,
       timings: {
-        [Stage.Finalized]: `${finalityDuration} sec`,
-        [Stage.Validated]: `${validateDuration} sec`,
-        [Stage.Relayed]: `${relayDuration} sec`,
+        [Stage.Finalized]: finalityDuration,
+        [Stage.Validated]: validateDuration,
+        [Stage.Relayed]: relayDuration,
       },
     };
   }
@@ -114,9 +90,9 @@ async function fetchMessageState(
     return {
       stage: Stage.Validated,
       timings: {
-        [Stage.Finalized]: `${finalityEstimate} sec`,
-        [Stage.Validated]: `${VALIDATION_TIME_EST} sec`,
-        [Stage.Relayed]: `~${relayEstimate} sec`,
+        [Stage.Finalized]: finalityEstimate,
+        [Stage.Validated]: VALIDATION_TIME_EST,
+        [Stage.Relayed]: relayEstimate,
       },
     };
   }
@@ -127,9 +103,9 @@ async function fetchMessageState(
     return {
       stage: Stage.Finalized,
       timings: {
-        [Stage.Finalized]: `${finalityEstimate} sec`,
-        [Stage.Validated]: `~${VALIDATION_TIME_EST} sec`,
-        [Stage.Relayed]: `~${relayEstimate} sec`,
+        [Stage.Finalized]: finalityEstimate,
+        [Stage.Validated]: VALIDATION_TIME_EST,
+        [Stage.Relayed]: relayEstimate,
       },
     };
   }
@@ -137,9 +113,9 @@ async function fetchMessageState(
   return {
     stage: Stage.Sent,
     timings: {
-      [Stage.Finalized]: `~${finalityEstimate} sec`,
-      [Stage.Validated]: `~${VALIDATION_TIME_EST} sec`,
-      [Stage.Relayed]: `~${relayEstimate} sec`,
+      [Stage.Finalized]: finalityEstimate,
+      [Stage.Validated]: VALIDATION_TIME_EST,
+      [Stage.Relayed]: relayEstimate,
     },
   };
 }
@@ -147,6 +123,10 @@ async function fetchMessageState(
 function getFinalityBlocks(chainId: number) {
   const finalityBlocks = chainIdToMetadata[chainId]?.blocks.confirmations || 0;
   return Math.max(finalityBlocks, 1);
+}
+
+function getBlockTimeEst(chainId: number) {
+  return chainIdToMetadata[chainId]?.blocks.estimateBlockTime || 3;
 }
 
 async function tryFetchChainLatestBlock(chainId: number) {

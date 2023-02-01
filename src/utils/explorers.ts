@@ -26,7 +26,12 @@ export function getTxExplorerUrl(chainId: number, hash?: string) {
   return `${baseUrl}/tx/${hash}`;
 }
 
-export async function queryExplorer<P>(chainId: number, path: string, apiKey?: string) {
+export async function queryExplorer<P>(
+  chainId: number,
+  path: string,
+  apiKey?: string,
+  timeout?: number,
+) {
   const baseUrl = getExplorerApiUrl(chainId);
   if (!baseUrl) throw new Error(`No URL found for explorer for chain ${chainId}`);
 
@@ -37,12 +42,12 @@ export async function queryExplorer<P>(chainId: number, path: string, apiKey?: s
     url += `&apikey=${apiKey}`;
   }
 
-  const result = await executeQuery<P>(url);
+  const result = await executeExplorerQuery<P>(url, timeout);
   return result;
 }
 
-async function executeQuery<P>(url: string) {
-  const response = await fetchWithTimeout(url);
+export async function executeExplorerQuery<P>(url: string, timeout?: number) {
+  const response = await fetchWithTimeout(url, undefined, timeout);
   if (!response.ok) {
     throw new Error(`Fetch response not okay: ${response.status}`);
   }

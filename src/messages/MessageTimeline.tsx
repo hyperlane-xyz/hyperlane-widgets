@@ -7,42 +7,34 @@ import { LockIcon } from '../icons/Lock';
 import { ShieldIcon } from '../icons/Shield';
 import { WideChevron } from '../icons/WideChevron';
 
-import { Message, MessageStatus, PartialTransactionReceipt } from './types';
-import { Stage, useMessageStage } from './useMessageState';
+import { MessageStatus, MessageStage as Stage, StageTimings } from './types';
 
 interface Props {
-  message: Message;
-  resolvedStatus: MessageStatus;
-  resolvedDestinationTx?: PartialTransactionReceipt;
-  shouldBlur?: boolean;
+  status: MessageStatus;
+  stage: Stage;
+  timings: StageTimings;
+  timestampSent?: number;
 }
 
-export function MessageTimeline({ message, resolvedStatus: status, resolvedDestinationTx }: Props) {
-  const {
-    nonce,
-    originChainId,
-    destinationChainId,
-    originTimestamp,
-    destinationTimestamp,
-    originTransaction,
-  } = message;
+export function MessageTimeline({ status, stage: _stage, timings, timestampSent }: Props) {
+  // Ignore stage value if status shows as delivered
+  const stage = status === MessageStatus.Delivered ? Stage.Relayed : _stage;
 
-  const { stage, timings } = useMessageStage(
-    status,
-    nonce,
-    originChainId,
-    destinationChainId,
-    originTransaction.blockNumber,
-    originTimestamp,
-    destinationTimestamp || resolvedDestinationTx?.timestamp,
-  );
-
-  const timeSent = new Date(originTimestamp);
+  const timeSent = timestampSent ? new Date(timestampSent) : null;
+  const timeSentStr = timeSent
+    ? `${timeSent.toLocaleDateString()} ${timeSent.toLocaleTimeString()}`
+    : null;
 
   return (
     <div className="sm:px-2 pt-14 pb-1 flex">
       <div className="flex-1 flex flex-col items-center">
-        <div className="w-full h-6 flex items-center justify-center bg-blue-500 rounded-l relative">
+        <div
+          className={`w-full h-6 flex items-center justify-center bg-blue-500 rounded-l relative ${getStageClass(
+            Stage.Sent,
+            stage,
+            status,
+          )}`}
+        >
           <div className="w-3 h-3 rounded-full bg-white"></div>
           <div className="absolute -top-12 flex flex-col items-center">
             <StageIcon Icon={AirplaneIcon} />
@@ -52,8 +44,14 @@ export function MessageTimeline({ message, resolvedStatus: status, resolvedDesti
             <WideChevron direction="e" height="100%" width="auto" />
           </div>
         </div>
-        <h4 className="mt-2.5 text-gray-700 text-sm sm:text-base">Message sent</h4>
-        <p className="mt-1 sm:px-4 text-xs text-gray-500 text-center">{`Origin transaction sent at ${timeSent.toLocaleDateString()} ${timeSent.toLocaleTimeString()}`}</p>
+        <h4 className="mt-2.5 text-gray-700 text-sm sm:text-base">
+          {getStageHeader(Stage.Sent, stage, timings, status)}
+        </h4>
+        <p className="mt-1 sm:px-4 text-xs text-gray-500 text-center">
+          {timeSentStr
+            ? `Origin transaction sent at ${timeSentStr}`
+            : 'Waiting for origin transaction'}
+        </p>
       </div>
       <div className="flex-0 w-2 sm:w-5"></div>
       <div className="flex-1 flex flex-col items-center">
@@ -66,7 +64,7 @@ export function MessageTimeline({ message, resolvedStatus: status, resolvedDesti
         >
           <div className="w-3 h-3 rounded-full bg-white"></div>
           <div className="absolute -top-12 flex flex-col items-center">
-            <StageIcon Icon={LockIcon} size={12} />
+            <StageIcon Icon={LockIcon} size={14} />
             <div className="w-0.5 h-4 bg-blue-500"></div>
           </div>
           <div className="absolute -left-3 top-0 h-6">
@@ -151,7 +149,7 @@ function StageIcon({ Icon, size }: { Icon: any; size?: number }) {
 function getStageHeader(
   targetStage: Stage,
   currentStage: Stage,
-  timings: Partial<Record<Stage, string>>,
+  timings: StageTimings,
   status: MessageStatus,
 ) {
   let label = '';
@@ -161,13 +159,15 @@ function getStageHeader(
     label = currentStage >= targetStage ? 'Validated' : 'Validating';
   } else if (targetStage === Stage.Relayed) {
     label = currentStage >= targetStage ? 'Relayed' : 'Relaying';
+  } else if (targetStage === Stage.Sent) {
+    label = currentStage >= targetStage ? 'Sent' : 'Sending';
   }
   const timing = timings[targetStage];
   if (status === MessageStatus.Failing) {
     if (targetStage === currentStage + 1) return `${label}: failed`;
     if (targetStage > currentStage + 1) return label;
   }
-  if (timing) return `${label}: ${timing}`;
+  if (timing) return `${label}: ${timing} sec`;
   else return label;
 }
 
