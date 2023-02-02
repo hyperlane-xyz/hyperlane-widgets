@@ -15,16 +15,16 @@ function _WideChevron({ width, height, direction, color, rounded, classes }: Wid
   let directionClass;
   switch (direction) {
     case 'n':
-      directionClass = '-rotate-90';
+      directionClass = 'htw--rotate-90';
       break;
     case 'e':
       directionClass = '';
       break;
     case 's':
-      directionClass = 'rotate-90';
+      directionClass = 'htw-rotate-90';
       break;
     case 'w':
-      directionClass = 'rotate-180';
+      directionClass = 'htw-rotate-180';
       break;
     default:
       throw new Error(`Invalid chevron direction ${direction}`);

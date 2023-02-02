@@ -70,7 +70,7 @@ function _ChainLogo({
     return (
       <div
         style={{ width: `${size}px`, height: `${size}px` }}
-        className="flex items-center justify-center rounded-full bg-gray-100 transition-all"
+        className="htw-flex htw-items-center htw-justify-center htw-rounded-full htw-bg-gray-100 htw-transition-all"
         title={title}
       >
         {ImageSrc ? (

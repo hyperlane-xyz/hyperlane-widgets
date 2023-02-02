@@ -33,10 +33,10 @@ export function MessageTimeline({
     : null;
 
   return (
-    <div className="pt-14 pb-1 flex">
+    <div className="htw-pt-14 htw-pb-1 htw-flex">
       <div className={styles.stageContainer}>
         <div
-          className={`${styles.stageBar} rounded-l ${getStageOpacityClass(
+          className={`${styles.stageBar} htw-rounded-l ${getStageOpacityClass(
             Stage.Sent,
             stage,
             status,
@@ -101,7 +101,7 @@ export function MessageTimeline({
       <div className={styles.stageSpacer}></div>
       <div className={styles.stageContainer}>
         <div
-          className={`${styles.stageBar} rounded-r ${getStageOpacityClass(
+          className={`${styles.stageBar} htw-rounded-r ${getStageOpacityClass(
             Stage.Relayed,
             stage,
             status,
@@ -127,7 +127,7 @@ export function MessageTimeline({
 
 function StageIcon({ Icon, size }: { Icon: any; size?: number }) {
   return (
-    <div className="h-9 w-9 flex items-center justify-center rounded-full bg-blue-500">
+    <div className="htw-h-9 htw-w-9 htw-flex htw-items-center htw-justify-center htw-rounded-full htw-bg-blue-500">
       <Icon width={size ?? 14} height={size ?? 14} alt="" color={Color.White} />
     </div>
   );
@@ -135,7 +135,7 @@ function StageIcon({ Icon, size }: { Icon: any; size?: number }) {
 
 function ChevronWhite() {
   return (
-    <div className="absolute -left-3 top-0 h-6">
+    <div className="htw-absolute htw--left-3 htw-top-0 htw-h-6">
       <WideChevron direction="e" height="100%" width="auto" color="#ffffff" />
     </div>
   );
@@ -143,7 +143,7 @@ function ChevronWhite() {
 
 function ChevronBlue() {
   return (
-    <div className="absolute -right-3 top-0 h-6">
+    <div className="htw-absolute htw--right-3 htw-top-0 htw-h-6">
       <WideChevron direction="e" height="100%" width="auto" />
     </div>
   );
@@ -181,17 +181,18 @@ function getStageOpacityClass(
 ) {
   if (currentStage >= targetStage) return '';
   if (currentStage === targetStage - 1 && messageStatus !== MessageStatus.Failing)
-    return 'animate-pulse-slow';
-  return 'opacity-50';
+    return 'htw-animate-pulse-slow';
+  return 'htw-opacity-50';
 }
 
 const styles = {
-  stageContainer: 'flex-1 flex flex-col items-center',
-  stageSpacer: 'flex-0 w-1 xs:w-2 sm:w-3',
-  stageBar: 'w-full h-6 flex items-center justify-center bg-blue-500 relative',
-  stageHole: 'w-3 h-3 rounded-full bg-white',
-  stageIconContainer: 'absolute -top-12 flex flex-col items-center',
-  stageIconCircle: 'w-0.5 h-4 bg-blue-500',
-  stageHeader: 'mt-2.5 text-gray-700 text-xs xs:text-sm sm:text-base',
-  stageDesc: 'mt-1 sm:px-4 text-xs text-gray-500 text-center',
+  stageContainer: 'htw-flex-1 htw-flex htw-flex-col htw-items-center',
+  stageSpacer: 'htw-flex-0 htw-w-1 xs:htw-w-2 sm:htw-w-3',
+  stageBar:
+    'htw-w-full htw-h-6 htw-flex htw-items-center htw-justify-center htw-bg-blue-500 htw-relative',
+  stageHole: 'htw-w-3 htw-h-3 htw-rounded-full htw-bg-white',
+  stageIconContainer: 'htw-absolute htw--top-12 htw-flex htw-flex-col htw-items-center',
+  stageIconCircle: 'htw-w-0.5 htw-h-4 htw-bg-blue-500',
+  stageHeader: 'htw-mt-2.5 htw-text-gray-700 htw-text-xs xs:htw-text-sm sm:htw-text-base',
+  stageDesc: 'htw-mt-1 sm:htw-px-4 htw-text-xs htw-text-gray-500 htw-text-center',
 };
