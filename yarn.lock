@@ -2205,39 +2205,39 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/core@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@hyperlane-xyz/core@npm:1.0.0"
+"@hyperlane-xyz/core@npm:1.1.3":
+  version: 1.1.3
+  resolution: "@hyperlane-xyz/core@npm:1.1.3"
   dependencies:
-    "@hyperlane-xyz/utils": 1.0.0
+    "@hyperlane-xyz/utils": 1.1.3
     "@openzeppelin/contracts": ^4.8.0
     "@openzeppelin/contracts-upgradeable": ^4.8.0
-  checksum: 4a2bfcd87b3bdb868051ea24378db0d70449266ac9601e75da2842b8f0887e6715b6d42fdcef6bf604a2524c4e43bfdb90c1b41deb767a31afed18e8804c46b7
+  checksum: 6872fcdac9add5ac55aad891a7c9fbd7709e30ad06ca6d063bf8b4752533d143cd8418c78218df4073a98b06e8ec4fc8b185444ac62e558498da09ef47efbe19
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/sdk@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@hyperlane-xyz/sdk@npm:1.0.0"
+"@hyperlane-xyz/sdk@npm:1.1.3":
+  version: 1.1.3
+  resolution: "@hyperlane-xyz/sdk@npm:1.1.3"
   dependencies:
     "@hyperlane-xyz/celo-ethers-provider": ^0.1.1
-    "@hyperlane-xyz/core": 1.0.0
-    "@hyperlane-xyz/utils": 1.0.0
+    "@hyperlane-xyz/core": 1.1.3
+    "@hyperlane-xyz/utils": 1.1.3
     "@wagmi/chains": ^0.1.3
     coingecko-api: ^1.0.10
     cross-fetch: ^3.1.5
     debug: ^4.3.4
     ethers: ^5.7.2
-  checksum: 93c878ba85fde204d9d4c6e19c6d467a7dd232253cb5b03e7a5b52a6121962c1a6592b9431e6af92242b763c38eac45978ddec9dfd5d6bd4557fb565a14cd81b
+  checksum: 20dabd0acc33d737c80af432605608e6cea1aaf6fa6db9839687a5427324e0044dcdf29b0f26bc2ba732eb6faf44f3c1ca226a3387c9e608ab1f25c6ec24332d
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/utils@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@hyperlane-xyz/utils@npm:1.0.0"
+"@hyperlane-xyz/utils@npm:1.1.3":
+  version: 1.1.3
+  resolution: "@hyperlane-xyz/utils@npm:1.1.3"
   dependencies:
     ethers: ^5.7.2
-  checksum: f19440f507d8219e62b5792211459233c478ee72daa5109a502bd66eb611bdc09e55c5b67f32f3b46a89307c7f70e672acaf58a4018adb4f343a5eb566cd1dcd
+  checksum: afe6847b0810b85ba1ddbe5c0e28718d86e1890220edf7ab3b629e1a8820c93405ec7265da6ce1b16d32b31947f8b4b912b7756cfd4f14f674f4dc48c4042f09
   languageName: node
   linkType: hard
 
@@ -2246,7 +2246,7 @@ __metadata:
   resolution: "@hyperlane-xyz/widgets@workspace:."
   dependencies:
     "@babel/core": ^7.20.12
-    "@hyperlane-xyz/sdk": 1.0.0
+    "@hyperlane-xyz/sdk": 1.1.3
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-actions": ^6.5.15
     "@storybook/addon-docs": ^6.5.15
@@ -2276,7 +2276,7 @@ __metadata:
     ts-node: ^10.8.0
     typescript: ^4.7.2
   peerDependencies:
-    "@hyperlane-xyz/sdk": 1.0.0
+    "@hyperlane-xyz/sdk": ^1
     react: ^18
     react-dom: ^18
   languageName: unknown
