@@ -61,7 +61,7 @@ export enum MessageStage {
 }
 
 export type StageTimings = {
-  [MessageStage.Finalized]: number;
-  [MessageStage.Validated]: number;
-  [MessageStage.Relayed]: number;
+  [MessageStage.Finalized]: number | null;
+  [MessageStage.Validated]: number | null;
+  [MessageStage.Relayed]: number | null;
 };

@@ -48,9 +48,16 @@
   "browser": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
   "exports": {
-    "import": "./dist/esm/index.js",
-    "require": "./dist/cjs/index.js",
-    "default": "./dist/esm/index.js"
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js",
+      "default": "./dist/esm/index.js"
+    },
+    "./styles.css": {
+      "import": "./dist/styles.css",
+      "style": "./dist/styles.css",
+      "default": "./dist/styles.css"
+    }
   },
   "homepage": "https://www.hyperlane.xyz",
   "keywords": [

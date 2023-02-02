@@ -15,6 +15,12 @@ interface Params {
   retryInterval?: number;
 }
 
+const defaultTiming: StageTimings = {
+  [Stage.Finalized]: null,
+  [Stage.Validated]: null,
+  [Stage.Relayed]: null,
+};
+
 export function useMessageStage({ message, retryInterval = 2000 }: Params) {
   // Tempting to use react-query here as we did in Explorer but
   // avoiding for now to keep dependencies for this lib minimal
@@ -39,7 +45,7 @@ export function useMessageStage({ message, retryInterval = 2000 }: Params) {
 
   return {
     stage: data?.stage || message ? Stage.Sent : Stage.Preparing,
-    timings: data?.timings || {},
+    timings: data?.timings || defaultTiming,
     isLoading,
     error,
   };
