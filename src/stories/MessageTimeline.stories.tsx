@@ -57,3 +57,12 @@ TimelineOriginDelivered.args = {
   timings: defaultTimings,
   timestampSent: defaultTimeSent,
 };
+
+export const TimelineHideDesc = Template.bind({});
+TimelineHideDesc.args = {
+  status: MessageStatus.Pending,
+  stage: MessageStage.Sent,
+  timings: defaultTimings,
+  timestampSent: defaultTimeSent,
+  hideDescriptions: true,
+};

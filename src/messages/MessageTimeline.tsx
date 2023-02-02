@@ -14,9 +14,16 @@ interface Props {
   stage: Stage;
   timings: StageTimings;
   timestampSent?: number;
+  hideDescriptions?: boolean;
 }
 
-export function MessageTimeline({ status, stage: _stage, timings, timestampSent }: Props) {
+export function MessageTimeline({
+  status,
+  stage: _stage,
+  timings,
+  timestampSent,
+  hideDescriptions,
+}: Props) {
   // Ignore stage value if status shows as delivered
   const stage = status === MessageStatus.Delivered ? Stage.Relayed : _stage;
 
@@ -26,7 +33,7 @@ export function MessageTimeline({ status, stage: _stage, timings, timestampSent 
     : null;
 
   return (
-    <div className="sm:px-2 pt-14 pb-1 flex">
+    <div className="pt-14 pb-1 flex">
       <div className={styles.stageContainer}>
         <div
           className={`${styles.stageBar} rounded-l ${getStageOpacityClass(
@@ -43,11 +50,13 @@ export function MessageTimeline({ status, stage: _stage, timings, timestampSent 
           <ChevronBlue />
         </div>
         <h4 className={styles.stageHeader}>{getStageHeader(Stage.Sent, stage, timings, status)}</h4>
-        <p className={styles.stageDesc}>
-          {timeSentStr
-            ? `Origin transaction sent at ${timeSentStr}`
-            : 'Waiting for origin transaction'}
-        </p>
+        {!hideDescriptions && (
+          <p className={styles.stageDesc}>
+            {timeSentStr
+              ? `Origin transaction sent at ${timeSentStr}`
+              : 'Waiting for origin transaction'}
+          </p>
+        )}
       </div>
       <div className={styles.stageSpacer}></div>
       <div className={styles.stageContainer}>
@@ -65,7 +74,9 @@ export function MessageTimeline({ status, stage: _stage, timings, timestampSent 
         <h4 className={styles.stageHeader}>
           {getStageHeader(Stage.Finalized, stage, timings, status)}
         </h4>
-        <p className={styles.stageDesc}>Origin transaction has sufficient confirmations</p>
+        {!hideDescriptions && (
+          <p className={styles.stageDesc}>Origin transaction has sufficient confirmations</p>
+        )}
       </div>
       <div className={styles.stageSpacer}></div>
       <div className={styles.stageContainer}>
@@ -83,7 +94,9 @@ export function MessageTimeline({ status, stage: _stage, timings, timestampSent 
         <h4 className={styles.stageHeader}>
           {getStageHeader(Stage.Validated, stage, timings, status)}
         </h4>
-        <p className={styles.stageDesc}>Validators have signed the message bundle</p>
+        {!hideDescriptions && (
+          <p className={styles.stageDesc}>Validators have signed the message bundle</p>
+        )}
       </div>
       <div className={styles.stageSpacer}></div>
       <div className={styles.stageContainer}>
@@ -104,7 +117,9 @@ export function MessageTimeline({ status, stage: _stage, timings, timestampSent 
         <h4 className={styles.stageHeader}>
           {getStageHeader(Stage.Relayed, stage, timings, status)}
         </h4>
-        <p className={styles.stageDesc}>Destination transaction has been confirmed</p>
+        {!hideDescriptions && (
+          <p className={styles.stageDesc}>Destination transaction has been confirmed</p>
+        )}
       </div>
     </div>
   );
@@ -172,7 +187,7 @@ function getStageOpacityClass(
 
 const styles = {
   stageContainer: 'flex-1 flex flex-col items-center',
-  stageSpacer: 'flex-0 w-1 xs:w-2 sm:w-5',
+  stageSpacer: 'flex-0 w-1 xs:w-2 sm:w-3',
   stageBar: 'w-full h-6 flex items-center justify-center bg-blue-500 relative',
   stageHole: 'w-3 h-3 rounded-full bg-white',
   stageIconContainer: 'absolute -top-12 flex flex-col items-center',
