@@ -65,7 +65,7 @@ function _ChainLogo({
     : null;
   const title = getChainDisplayName(chainId);
 
-  if (background) {
+  if (background || !ImageSrc) {
     const iconSize = Math.floor(size / 1.8);
     return (
       <div
@@ -80,10 +80,8 @@ function _ChainLogo({
         )}
       </div>
     );
-  } else if (ImageSrc) {
-    return <ImageSrc width={size} height={size} title={title} />;
   } else {
-    return <QuestionMarkIcon width={size} height={size} />;
+    return <ImageSrc width={size} height={size} title={title} />;
   }
 }
 
