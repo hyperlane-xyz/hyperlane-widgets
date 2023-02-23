@@ -3,6 +3,7 @@ export { default as Avalanche } from './Avalanche';
 export { default as Bsc } from './Bsc';
 export { default as Celo } from './Celo';
 export { default as Ethereum } from './Ethereum';
+export { default as Gnosis } from './Gnosis';
 export { default as Hyperlane } from './Hyperlane';
 export { default as Moonbeam } from './Moonbeam';
 export { default as Optimism } from './Optimism';

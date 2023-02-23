@@ -127,12 +127,12 @@ async function fetchMessageState(message: PartialMessage) {
 }
 
 function getFinalityBlocks(chainId: number) {
-  const finalityBlocks = chainIdToMetadata[chainId]?.blocks.confirmations || 0;
+  const finalityBlocks = chainIdToMetadata[chainId]?.blocks?.confirmations || 0;
   return Math.max(finalityBlocks, 1);
 }
 
 function getBlockTimeEst(chainId: number) {
-  return chainIdToMetadata[chainId]?.blocks.estimateBlockTime || 3;
+  return chainIdToMetadata[chainId]?.blocks?.estimateBlockTime || 3;
 }
 
 async function tryFetchChainLatestBlock(chainId: number) {
