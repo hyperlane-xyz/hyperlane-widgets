@@ -1,6 +1,7 @@
 // TODO DE-DUPE WITH EXPLORER
 // Copied from explorer src/types.ts
 export enum MessageStatus {
+  Unknown = 'unknown',
   Pending = 'pending',
   Delivered = 'delivered',
   Failing = 'failing',
@@ -31,6 +32,7 @@ export interface Message {
   decodedBody?: string;
   originTransaction: PartialTransactionReceipt;
   destinationTransaction?: PartialTransactionReceipt;
+  isPiMsg?: boolean;
 }
 
 export type ApiMessage = Omit<
