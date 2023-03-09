@@ -1,6 +1,6 @@
-import React, { memo } from 'react';
+import React, { PropsWithChildren, ReactElement, memo } from 'react';
 
-import { chainIdToMetadata, chainMetadata } from '@hyperlane-xyz/sdk';
+import { chainMetadata } from '@hyperlane-xyz/sdk';
 
 import ArbitrumBlack from '../logos/black/Arbitrum';
 import AvalancheBlack from '../logos/black/Avalanche';
@@ -49,6 +49,7 @@ type CustomLogo = (props: { width: number; height: number; title?: string }) => 
 
 export interface ChainLogoProps {
   chainId?: number;
+  chainName?: string;
   size?: number;
   color?: boolean;
   background?: boolean;
@@ -57,41 +58,78 @@ export interface ChainLogoProps {
 
 function _ChainLogo({
   chainId,
+  chainName,
   size = 32,
   color = true,
   background = false,
   customLogos = {},
 }: ChainLogoProps) {
   const colorType = color ? 'color' : 'black';
+  const title = chainName || chainId?.toString() || 'Unknown';
+  const iconSize = Math.floor(size / 1.9);
   const ImageSrc = chainId
     ? customLogos[chainId]?.[colorType] || CHAIN_TO_LOGO[chainId]?.[colorType]
     : null;
-  const title = getChainDisplayName(chainId);
 
-  if (background || !ImageSrc) {
-    const iconSize = Math.floor(size / 1.8);
+  if (!ImageSrc) {
+    let icon: ReactElement;
+    if (chainName) {
+      icon = <div style={{ fontSize: iconSize }}>{chainName[0].toUpperCase()}</div>;
+    } else {
+      icon = <QuestionMarkIcon width={iconSize} height={iconSize} />;
+    }
     return (
-      <div
-        style={{ width: `${size}px`, height: `${size}px` }}
-        className="htw-flex htw-items-center htw-justify-center htw-rounded-full htw-bg-gray-100 htw-transition-all"
-        title={title}
-      >
-        {ImageSrc ? (
-          <ImageSrc width={iconSize} height={iconSize} />
-        ) : (
-          <QuestionMarkIcon width={iconSize} height={iconSize} />
-        )}
-      </div>
+      <Circle size={size} title={title} classes={getBackgroundColor(chainId)}>
+        {icon}
+      </Circle>
+    );
+  }
+
+  if (background) {
+    return (
+      <Circle size={size} title={title} classes="htw-bg-gray-100">
+        <ImageSrc width={iconSize} height={iconSize} />
+      </Circle>
     );
   } else {
     return <ImageSrc width={size} height={size} title={title} />;
   }
 }
 
-function getChainDisplayName(chainId?: number, shortName = false) {
-  if (!chainId || !chainIdToMetadata[chainId]) return 'Unknown';
-  const metadata = chainIdToMetadata[chainId];
-  return shortName ? metadata.displayNameShort || metadata.displayName : metadata.displayName;
+function Circle({
+  size,
+  title,
+  classes,
+  children,
+}: PropsWithChildren<{ size: string | number; title: string; classes: string }>) {
+  return (
+    <div
+      style={{ width: `${size}px`, height: `${size}px` }}
+      className={`htw-flex htw-items-center htw-justify-center htw-rounded-full htw-transition-all ${classes}`}
+      title={title}
+    >
+      {children}
+    </div>
+  );
+}
+
+function getBackgroundColor(chainId?: number) {
+  if (!chainId) return 'htw-bg-gray-100';
+  const mod = chainId % 5;
+  switch (mod) {
+    case 0:
+      return 'htw-bg-blue-100';
+    case 1:
+      return 'htw-bg-pink-200';
+    case 2:
+      return 'htw-bg-green-100';
+    case 3:
+      return 'htw-bg-orange-200';
+    case 4:
+      return 'htw-bg-violet-200';
+    default:
+      return 'htw-bg-gray-100';
+  }
 }
 
 export const ChainLogo = memo(_ChainLogo);

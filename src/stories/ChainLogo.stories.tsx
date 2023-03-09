@@ -17,23 +17,9 @@ ColorChain.args = {
   background: false,
 };
 
-export const ColorNoChain = Template.bind({});
-ColorNoChain.args = {
-  chainId: 0,
-  color: true,
-  background: false,
-};
-
 export const NoColorChain = Template.bind({});
 NoColorChain.args = {
   chainId: 1,
-  color: false,
-  background: false,
-};
-
-export const NoColorNoChain = Template.bind({});
-NoColorNoChain.args = {
-  chainId: 0,
   color: false,
   background: false,
 };
@@ -45,9 +31,28 @@ BackgroundColorChain.args = {
   background: true,
 };
 
-export const BackgroundColorNoChain = Template.bind({});
-BackgroundColorNoChain.args = {
-  chainId: 0,
-  color: true,
+export const BackgroundNoColorChain = Template.bind({});
+BackgroundNoColorChain.args = {
+  chainId: 1,
+  color: false,
   background: true,
 };
+
+export const JustChainName = Template.bind({});
+JustChainName.args = {
+  chainName: 'Ethereum',
+};
+
+export const JustChainId = Template.bind({});
+JustChainId.args = {
+  chainId: 422220,
+};
+
+export const ChainIdAndName = Template.bind({});
+ChainIdAndName.args = {
+  chainName: 'DopeChain',
+  chainId: 422220,
+};
+
+export const NoIdNoName = Template.bind({});
+NoIdNoName.args = {};
