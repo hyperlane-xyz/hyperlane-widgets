@@ -43,6 +43,7 @@ const CHAIN_TO_LOGO = {
   [chainMetadata.optimism.chainId]: { black: OptimismBlack, color: OptimismColor },
   [chainMetadata.optimismgoerli.chainId]: { black: OptimismBlack, color: OptimismColor },
   [chainMetadata.polygon.chainId]: { black: PolygonBlack, color: PolygonColor },
+  [chainMetadata.sepolia.chainId]: { black: EthereumBlack, color: EthereumColor },
 };
 
 type CustomLogo = (props: { width: number; height: number; title?: string }) => React.ReactElement;

@@ -1,7 +1,7 @@
 {
   "name": "@hyperlane-xyz/widgets",
   "description": "Common react components for Hyperlane projects",
-  "version": "1.2.2-beta0",
+  "version": "1.2.2",
   "author": "J M Rossy",
   "peerDependencies": {
     "@hyperlane-xyz/sdk": "^1.2",
@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
-    "@hyperlane-xyz/sdk": "1.2.1",
+    "@hyperlane-xyz/sdk": "1.2.2",
     "@mdx-js/react": "^1.6.22",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-docs": "^6.5.15",
