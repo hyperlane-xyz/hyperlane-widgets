@@ -1,5 +1,5 @@
 // TODO DE-DUPE WITH EXPLORER
-// Copied from explorer src/types.ts
+// Mostly copied from explorer src/types.ts
 export enum MessageStatus {
   Unknown = 'unknown',
   Pending = 'pending',
@@ -7,51 +7,68 @@ export enum MessageStatus {
   Failing = 'failing',
 }
 
-export interface PartialTransactionReceipt {
-  from: Address;
-  transactionHash: string;
-  blockNumber: number;
-  gasUsed: number;
+export interface MessageTxStub {
   timestamp: number;
+  hash: string;
+  from: Address;
 }
 
-export interface Message {
+export interface MessageTx extends MessageTxStub {
+  to: Address;
+  blockHash: string;
+  blockNumber: number;
+  mailbox: Address;
+  nonce: number;
+  gasLimit: number;
+  gasPrice: number;
+  effectiveGasPrice;
+  gasUsed: number;
+  cumulativeGasUsed: number;
+  maxFeePerGas: number;
+  maxPriorityPerGas: number;
+}
+
+export interface MessageStub {
+  status: MessageStatus;
   id: string; // Database id
   msgId: string; // Message hash
-  status: MessageStatus;
+  nonce: number; // formerly leafIndex
   sender: Address;
   recipient: Address;
-  originDomainId: number;
-  destinationDomainId: number;
   originChainId: number;
+  originDomainId: number;
   destinationChainId: number;
-  originTimestamp: number; // Note, equivalent to timestamp in originTransaction
-  destinationTimestamp?: number; // Note, equivalent to timestamp in destinationTransaction
-  nonce: number; // formerly leafIndex
+  destinationDomainId: number;
+  origin: MessageTxStub;
+  destination?: MessageTxStub;
+  isPiMsg?: boolean;
+}
+
+export interface Message extends MessageStub {
   body: string;
   decodedBody?: string;
-  originTransaction: PartialTransactionReceipt;
-  destinationTransaction?: PartialTransactionReceipt;
-  isPiMsg?: boolean;
+  origin: MessageTx;
+  destination?: MessageTx;
+  totalGasAmount?: string;
+  totalPayment?: string;
+  numPayments?: number;
 }
 
 export type ApiMessage = Omit<
   Message,
   | 'msgId' // use id field for msgId
-  | 'originChainId'
-  | 'destinationChainId'
-  | 'originTimestamp'
-  | 'destinationTimestamp'
   | 'decodedBody'
 >;
 
 export interface PartialMessage {
   status: MessageStatus;
   nonce: number;
+  originChainId: number;
   originDomainId: number;
+  destinationChainId: number;
   destinationDomainId: number;
-  originTransaction: { blockNumber: number; timestamp: number };
-  destinationTransaction?: { blockNumber: number; timestamp: number };
+  origin: { blockNumber: number; timestamp: number };
+  destination?: { blockNumber: number; timestamp: number };
 }
 
 export enum MessageStage {
