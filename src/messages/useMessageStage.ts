@@ -2,6 +2,7 @@ import { useCallback, useState } from 'react';
 
 import { chainIdToMetadata } from '@hyperlane-xyz/sdk';
 
+import { HYPERLANE_EXPLORER_API_URL } from '../consts';
 import { queryExplorerForBlock } from '../utils/explorers';
 import { fetchWithTimeout } from '../utils/timeout';
 import { useInterval } from '../utils/useInterval';
@@ -12,6 +13,7 @@ const VALIDATION_TIME_EST = 5;
 
 interface Params {
   message: PartialMessage | null | undefined;
+  explorerApiUrl?: string;
   retryInterval?: number;
 }
 
@@ -21,7 +23,11 @@ const defaultTiming: StageTimings = {
   [Stage.Relayed]: null,
 };
 
-export function useMessageStage({ message, retryInterval = 2000 }: Params) {
+export function useMessageStage({
+  message,
+  explorerApiUrl = HYPERLANE_EXPLORER_API_URL,
+  retryInterval = 2000,
+}: Params) {
   // Tempting to use react-query here as we did in Explorer but
   // avoiding for now to keep dependencies for this lib minimal
 
@@ -32,7 +38,7 @@ export function useMessageStage({ message, retryInterval = 2000 }: Params) {
   const fetcher = useCallback(() => {
     if (!message) return;
     setIsLoading(true);
-    fetchMessageState(message)
+    fetchMessageState(message, explorerApiUrl)
       .then((result) => {
         setData(result);
         setError(null);
@@ -51,19 +57,12 @@ export function useMessageStage({ message, retryInterval = 2000 }: Params) {
   };
 }
 
-async function fetchMessageState(message: PartialMessage) {
-  const {
-    status,
-    nonce,
-    originDomainId: originChainId, // TODO avoid assuming domain === chain
-    destinationDomainId: destChainId,
-    originTransaction,
-    destinationTransaction,
-  } = message;
-  const { blockNumber: originBlockNumber, timestamp: originTimestamp } = originTransaction;
-  const destTimestamp = destinationTransaction?.timestamp;
+async function fetchMessageState(message: PartialMessage, explorerApiUrl: string) {
+  const { status, nonce, originChainId, destinationChainId, origin, destination } = message;
+  const { blockNumber: originBlockNumber, timestamp: originTimestamp } = origin;
+  const destTimestamp = destination?.timestamp;
 
-  const relayEstimate = Math.floor(getBlockTimeEst(destChainId) * 1.5);
+  const relayEstimate = Math.floor(getBlockTimeEst(destinationChainId) * 1.5);
   const finalityBlocks = getFinalityBlocks(originChainId);
   const finalityEstimate = finalityBlocks * getBlockTimeEst(originChainId);
 
@@ -91,7 +90,7 @@ async function fetchMessageState(message: PartialMessage) {
     };
   }
 
-  const latestNonce = await tryFetchLatestNonce(originChainId);
+  const latestNonce = await tryFetchLatestNonce(originChainId, explorerApiUrl);
   if (latestNonce && latestNonce >= nonce) {
     return {
       stage: Stage.Validated,
@@ -146,11 +145,11 @@ async function tryFetchChainLatestBlock(chainId: number) {
   }
 }
 
-async function tryFetchLatestNonce(chainId: number) {
+async function tryFetchLatestNonce(chainId: number, explorerApiUrl: string) {
   console.debug(`Attempting to fetch nonce for:`, chainId);
   try {
     const response = await fetchWithTimeout(
-      '/api/latest-nonce',
+      `${explorerApiUrl}/latest-nonce`,
       {
         method: 'POST',
         headers: {

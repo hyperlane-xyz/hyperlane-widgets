@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import { HYPERLANE_EXPLORER_URL } from '../consts';
+import { HYPERLANE_EXPLORER_API_URL } from '../consts';
 import { executeExplorerQuery } from '../utils/explorers';
 import { useInterval } from '../utils/useInterval';
 
@@ -18,7 +18,7 @@ interface Params {
 export function useMessage({
   messageId,
   originTxHash,
-  explorerApiUrl = HYPERLANE_EXPLORER_URL,
+  explorerApiUrl = HYPERLANE_EXPLORER_API_URL,
   retryInterval = 2000,
 }: Params) {
   // Tempting to use react-query here as we did in Explorer but

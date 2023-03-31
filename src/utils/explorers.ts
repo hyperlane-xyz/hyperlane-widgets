@@ -69,7 +69,7 @@ interface PartialBlock {
 }
 
 export async function queryExplorerForBlock(chainId: number, blockNumber?: number | string) {
-  const path = `api?module=proxy&action=eth_getBlockByNumber&tag=${
+  const path = `?module=proxy&action=eth_getBlockByNumber&tag=${
     blockNumber || 'latest'
   }&boolean=false`;
   const block = await queryExplorer<PartialBlock>(chainId, path);
