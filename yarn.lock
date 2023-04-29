@@ -2196,39 +2196,41 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/core@npm:1.2.3":
-  version: 1.2.3
-  resolution: "@hyperlane-xyz/core@npm:1.2.3"
+"@hyperlane-xyz/core@npm:1.3.3":
+  version: 1.3.3
+  resolution: "@hyperlane-xyz/core@npm:1.3.3"
   dependencies:
-    "@hyperlane-xyz/utils": 1.2.3
+    "@hyperlane-xyz/utils": 1.3.3
     "@openzeppelin/contracts": ^4.8.0
     "@openzeppelin/contracts-upgradeable": ^4.8.0
-  checksum: c7e8f5c37d2e6874b6ca5f16024a4ea8b413393a2a4bb770a467ca7cc031b51a89fbe6989598c171de38acafcd2e990525be0274f793742faafc832a0db359fa
+  checksum: d21ede2e49e1152c518c7c89ff1c19811ae3eb78aaacf02dd7db028cbcc436b25bc39c77e2c93d7a08790dd32f5f9f921de4e0e0fccf0a1c8b8a7285cab18e01
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/sdk@npm:1.2.3":
-  version: 1.2.3
-  resolution: "@hyperlane-xyz/sdk@npm:1.2.3"
+"@hyperlane-xyz/sdk@npm:1.3.3":
+  version: 1.3.3
+  resolution: "@hyperlane-xyz/sdk@npm:1.3.3"
   dependencies:
-    "@hyperlane-xyz/core": 1.2.3
-    "@hyperlane-xyz/utils": 1.2.3
+    "@hyperlane-xyz/core": 1.3.3
+    "@hyperlane-xyz/utils": 1.3.3
+    "@types/coingecko-api": ^1.0.10
+    "@types/debug": ^4.1.7
     "@wagmi/chains": ^0.2.6
     coingecko-api: ^1.0.10
     cross-fetch: ^3.1.5
     debug: ^4.3.4
     ethers: ^5.7.2
     zod: ^3.21.2
-  checksum: a1afc8bdfe64916fdc6623c1df06bbe1393359fe6b29cefe3f25bb5ded16108e1bac037da9a29df7f0d61cc84940e571d148e41c7fd8539964a87e9a95c03c35
+  checksum: c54f9fc6b6ae93f00651d345591cf2945b8a3516b15b6f7a649b210abc1ed3c0725bbc80a0d2d5240cbe988bb21b10f7bb1f0c13348d3d3e2c4c1e2fe856c093
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/utils@npm:1.2.3":
-  version: 1.2.3
-  resolution: "@hyperlane-xyz/utils@npm:1.2.3"
+"@hyperlane-xyz/utils@npm:1.3.3":
+  version: 1.3.3
+  resolution: "@hyperlane-xyz/utils@npm:1.3.3"
   dependencies:
     ethers: ^5.7.2
-  checksum: 14222632d7ef2419f6b698afa0c4c466302dd0eb6f97d3c9031b7d42c033418547bf4092d480cc4346331f0233d4076caae75b86ffa2b7beed79741a146d3325
+  checksum: 1141ff5f8c7559f8727c63782b37cf0f9444942e3f48059fad7dde533b160137a15bcfcc9f590ae3ee56faf33b1da4f7c99f8d32134792acd94c41fc235f19c1
   languageName: node
   linkType: hard
 
@@ -2237,7 +2239,7 @@ __metadata:
   resolution: "@hyperlane-xyz/widgets@workspace:."
   dependencies:
     "@babel/core": ^7.20.12
-    "@hyperlane-xyz/sdk": 1.2.3
+    "@hyperlane-xyz/sdk": 1.3.3
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-actions": ^6.5.15
     "@storybook/addon-docs": ^6.5.15
@@ -2267,7 +2269,7 @@ __metadata:
     ts-node: ^10.8.0
     typescript: ^4.7.2
   peerDependencies:
-    "@hyperlane-xyz/sdk": ^1.2.3
+    "@hyperlane-xyz/sdk": ^1.3.3
     react: ^18
     react-dom: ^18
   languageName: unknown
@@ -4044,6 +4046,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/coingecko-api@npm:^1.0.10":
+  version: 1.0.10
+  resolution: "@types/coingecko-api@npm:1.0.10"
+  checksum: e9683f9ea9ce2f855f6565089981dd3fceb6c4674365438f3fc3877d089a2fb82cdea011b59d59c7baa1635dc610860cd29a10a4b7a650ff96521ead46f22a50
+  languageName: node
+  linkType: hard
+
+"@types/debug@npm:^4.1.7":
+  version: 4.1.7
+  resolution: "@types/debug@npm:4.1.7"
+  dependencies:
+    "@types/ms": "*"
+  checksum: 0a7b89d8ed72526858f0b61c6fd81f477853e8c4415bb97f48b1b5545248d2ae389931680b94b393b993a7cfe893537a200647d93defe6d87159b96812305adc
+  languageName: node
+  linkType: hard
+
 "@types/eslint-scope@npm:^3.7.3":
   version: 3.7.4
   resolution: "@types/eslint-scope@npm:3.7.4"
@@ -4182,6 +4200,13 @@ __metadata:
   version: 5.1.2
   resolution: "@types/minimatch@npm:5.1.2"
   checksum: 0391a282860c7cb6fe262c12b99564732401bdaa5e395bee9ca323c312c1a0f45efbf34dce974682036e857db59a5c9b1da522f3d6055aeead7097264c8705a8
+  languageName: node
+  linkType: hard
+
+"@types/ms@npm:*":
+  version: 0.7.31
+  resolution: "@types/ms@npm:0.7.31"
+  checksum: daadd354aedde024cce6f5aa873fefe7b71b22cd0e28632a69e8b677aeb48ae8caa1c60e5919bb781df040d116b01cb4316335167a3fc0ef6a63fa3614c0f6da
   languageName: node
   linkType: hard
 

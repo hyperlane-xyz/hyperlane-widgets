@@ -73,7 +73,7 @@ export async function queryExplorerForBlock(chainId: number, blockNumber?: numbe
     blockNumber || 'latest'
   }&boolean=false`;
   const block = await queryExplorer<PartialBlock>(chainId, path);
-  if (!block || parseInt(block.number.toString()) < 0) {
+  if (!block?.number || parseInt(block.number.toString()) < 0) {
     const msg = 'Invalid block result';
     console.error(msg, JSON.stringify(block), path);
     throw new Error(msg);

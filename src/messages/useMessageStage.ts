@@ -135,6 +135,7 @@ function getBlockTimeEst(chainId: number) {
 }
 
 async function tryFetchChainLatestBlock(chainId: number) {
+  if (!chainId) return null;
   console.debug(`Attempting to fetch latest block for:`, chainId);
   try {
     const block = await queryExplorerForBlock(chainId, 'latest');
@@ -146,6 +147,7 @@ async function tryFetchChainLatestBlock(chainId: number) {
 }
 
 async function tryFetchLatestNonce(chainId: number, explorerApiUrl: string) {
+  if (!chainId) return null;
   console.debug(`Attempting to fetch nonce for:`, chainId);
   try {
     const response = await fetchWithTimeout(
