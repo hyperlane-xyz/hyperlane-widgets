@@ -1,6 +1,7 @@
-export { Color } from './color';
+export { ColorPalette, seedToBgColor } from './color';
 export * from './consts';
 export { ChainLogo } from './icons/ChainLogo';
+export { Circle } from './icons/Circle';
 export { WideChevron } from './icons/WideChevron';
 export * as BlackLogos from './logos/black';
 export * as ColorLogos from './logos/color';

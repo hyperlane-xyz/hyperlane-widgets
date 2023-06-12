@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactElement, memo } from 'react';
+import React, { ReactElement, memo } from 'react';
 
 import { chainMetadata } from '@hyperlane-xyz/sdk';
 
@@ -21,11 +21,14 @@ import MoonbeamColor from '../logos/color/Moonbeam';
 import OptimismColor from '../logos/color/Optimism';
 import PolygonColor from '../logos/color/Polygon';
 
+import { Circle } from './Circle';
 import { QuestionMarkIcon } from './QuestionMark';
+
+type SvgIcon = (props: { width: number; height: number; title?: string }) => ReactElement;
 
 // Keep up to date as new chains are added or
 // icon will fallback to default (question mark)
-const CHAIN_TO_LOGO = {
+const CHAIN_TO_LOGO: Record<number, { black: SvgIcon; color: SvgIcon }> = {
   [chainMetadata.alfajores.chainId]: { black: CeloBlack, color: CeloColor },
   [chainMetadata.arbitrum.chainId]: { black: ArbitrumBlack, color: ArbitrumColor },
   [chainMetadata.arbitrumgoerli.chainId]: { black: ArbitrumBlack, color: ArbitrumColor },
@@ -46,15 +49,13 @@ const CHAIN_TO_LOGO = {
   [chainMetadata.sepolia.chainId]: { black: EthereumBlack, color: EthereumColor },
 };
 
-type CustomLogo = (props: { width: number; height: number; title?: string }) => React.ReactElement;
-
 export interface ChainLogoProps {
   chainId?: number;
   chainName?: string;
   size?: number;
   color?: boolean;
   background?: boolean;
-  customLogos?: Record<number, { color: CustomLogo; black: CustomLogo }>;
+  icon?: SvgIcon; // Override the default set used above. Necessary for PI chain logos.
 }
 
 function _ChainLogo({
@@ -63,25 +64,21 @@ function _ChainLogo({
   size = 32,
   color = true,
   background = false,
-  customLogos = {},
+  icon,
 }: ChainLogoProps) {
   const colorType = color ? 'color' : 'black';
   const title = chainName || chainId?.toString() || 'Unknown';
   const iconSize = Math.floor(size / 1.9);
-  const ImageSrc = chainId
-    ? customLogos[chainId]?.[colorType] || CHAIN_TO_LOGO[chainId]?.[colorType]
-    : null;
+  const ImageNode = icon ?? (chainId ? CHAIN_TO_LOGO[chainId]?.[colorType] : null);
 
-  if (!ImageSrc) {
-    let icon: ReactElement;
-    if (chainName) {
-      icon = <div style={{ fontSize: iconSize }}>{chainName[0].toUpperCase()}</div>;
-    } else {
-      icon = <QuestionMarkIcon width={iconSize} height={iconSize} />;
-    }
+  if (!ImageNode) {
     return (
-      <Circle size={size} title={title} classes={getBackgroundColor(chainId)}>
-        {icon}
+      <Circle size={size} title={title} bgColorSeed={chainId || 0}>
+        {chainName ? (
+          <div style={{ fontSize: iconSize }}>{chainName[0].toUpperCase()}</div>
+        ) : (
+          <QuestionMarkIcon width={iconSize} height={iconSize} />
+        )}
       </Circle>
     );
   }
@@ -89,47 +86,11 @@ function _ChainLogo({
   if (background) {
     return (
       <Circle size={size} title={title} classes="htw-bg-gray-100">
-        <ImageSrc width={iconSize} height={iconSize} />
+        <ImageNode width={iconSize} height={iconSize} />
       </Circle>
     );
   } else {
-    return <ImageSrc width={size} height={size} title={title} />;
-  }
-}
-
-function Circle({
-  size,
-  title,
-  classes,
-  children,
-}: PropsWithChildren<{ size: string | number; title: string; classes: string }>) {
-  return (
-    <div
-      style={{ width: `${size}px`, height: `${size}px` }}
-      className={`htw-flex htw-items-center htw-justify-center htw-rounded-full htw-transition-all ${classes}`}
-      title={title}
-    >
-      {children}
-    </div>
-  );
-}
-
-function getBackgroundColor(chainId?: number) {
-  if (!chainId) return 'htw-bg-gray-100';
-  const mod = chainId % 5;
-  switch (mod) {
-    case 0:
-      return 'htw-bg-blue-100';
-    case 1:
-      return 'htw-bg-pink-200';
-    case 2:
-      return 'htw-bg-green-100';
-    case 3:
-      return 'htw-bg-orange-200';
-    case 4:
-      return 'htw-bg-violet-200';
-    default:
-      return 'htw-bg-gray-100';
+    return <ImageNode width={size} height={size} title={title} />;
   }
 }
 

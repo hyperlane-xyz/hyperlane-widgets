@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Color } from '../color';
+import { ColorPalette } from '../color';
 import { AirplaneIcon } from '../icons/Airplane';
 import { EnvelopeIcon } from '../icons/Envelope';
 import { LockIcon } from '../icons/Lock';
@@ -33,7 +33,7 @@ export function MessageTimeline({
     : null;
 
   return (
-    <div className="htw-pt-14 htw-pb-1 htw-flex">
+    <div className="htw-pt-14 htw-pb-1 htw-flex htw-w-full">
       <div className={styles.stageContainer}>
         <div
           className={`${styles.stageBar} htw-rounded-l ${getStageOpacityClass(
@@ -128,7 +128,7 @@ export function MessageTimeline({
 function StageIcon({ Icon, size }: { Icon: any; size?: number }) {
   return (
     <div className="htw-h-9 htw-w-9 htw-flex htw-items-center htw-justify-center htw-rounded-full htw-bg-blue-500">
-      <Icon width={size ?? 14} height={size ?? 14} alt="" color={Color.White} />
+      <Icon width={size ?? 14} height={size ?? 14} alt="" color={ColorPalette.White} />
     </div>
   );
 }
