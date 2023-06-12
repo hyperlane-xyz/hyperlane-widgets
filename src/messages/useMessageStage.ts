@@ -36,7 +36,13 @@ export function useMessageStage({
   const [data, setData] = useState<{ stage: Stage; timings: StageTimings } | null>(null);
 
   const fetcher = useCallback(() => {
-    if (!message) return;
+    // Skip invalid or placeholder messages
+    if (!isValidMessage(message)) return;
+    // Don't re-run for failing messages
+    if (message.status === MessageStatus.Failing && data) return;
+    // Don't re-run for pending, validated messages
+    if (message.status === MessageStatus.Pending && data?.stage === Stage.Validated) return;
+
     setIsLoading(true);
     fetchMessageState(message, explorerApiUrl)
       .then((result) => {
@@ -45,13 +51,13 @@ export function useMessageStage({
       })
       .catch((e) => setError(e.toString()))
       .finally(() => setIsLoading(false));
-  }, [message]);
+  }, [message, data]);
 
   useInterval(fetcher, retryInterval);
 
   return {
-    stage: data?.stage || message ? Stage.Sent : Stage.Preparing,
-    timings: data?.timings || defaultTiming,
+    stage: data?.stage ? data.stage : isValidMessage(message) ? Stage.Sent : Stage.Preparing,
+    timings: data?.timings ? data.timings : defaultTiming,
     isLoading,
     error,
   };
@@ -168,4 +174,14 @@ async function tryFetchLatestNonce(chainId: number, explorerApiUrl: string) {
     console.error('Error fetching nonce', error);
     return null;
   }
+}
+
+function isValidMessage(message: PartialMessage | undefined | null): message is PartialMessage {
+  return !!(
+    message &&
+    message.originChainId &&
+    message.destinationChainId &&
+    message.originDomainId &&
+    message.destinationDomainId
+  );
 }
