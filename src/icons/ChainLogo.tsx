@@ -1,6 +1,7 @@
 import React, { ReactElement, memo } from 'react';
 
 import { chainMetadata } from '@hyperlane-xyz/sdk';
+import { solana, solanatestnet } from '@hyperlane-xyz/sdk/dist/consts/chainMetadata';
 
 import ArbitrumBlack from '../logos/black/Arbitrum';
 import AvalancheBlack from '../logos/black/Avalanche';
@@ -11,6 +12,7 @@ import GnosisBlack from '../logos/black/Gnosis';
 import MoonbeamBlack from '../logos/black/Moonbeam';
 import OptimismBlack from '../logos/black/Optimism';
 import PolygonBlack from '../logos/black/Polygon';
+import SolanaBlack from '../logos/black/Solana';
 import ArbitrumColor from '../logos/color/Arbitrum';
 import AvalancheColor from '../logos/color/Avalanche';
 import BscColor from '../logos/color/Bsc';
@@ -20,6 +22,7 @@ import GnosisColor from '../logos/color/Gnosis';
 import MoonbeamColor from '../logos/color/Moonbeam';
 import OptimismColor from '../logos/color/Optimism';
 import PolygonColor from '../logos/color/Polygon';
+import SolanaColor from '../logos/color/Solana';
 
 import { Circle } from './Circle';
 import { QuestionMarkIcon } from './QuestionMark';
@@ -47,6 +50,10 @@ const CHAIN_TO_LOGO: Record<number, { black: SvgIcon; color: SvgIcon }> = {
   [chainMetadata.optimismgoerli.chainId]: { black: OptimismBlack, color: OptimismColor },
   [chainMetadata.polygon.chainId]: { black: PolygonBlack, color: PolygonColor },
   [chainMetadata.sepolia.chainId]: { black: EthereumBlack, color: EthereumColor },
+  // TODO replace with access via chainMetadata when it's added there
+  [solana.chainId]: { black: SolanaBlack, color: SolanaColor },
+  [solanatestnet.chainId]: { black: SolanaBlack, color: SolanaColor },
+  [chainMetadata.solanadevnet.chainId]: { black: SolanaBlack, color: SolanaColor },
 };
 
 export interface ChainLogoProps {

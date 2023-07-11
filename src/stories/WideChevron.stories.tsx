@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { Color } from '../color';
+import { ColorPalette } from '../color';
 import { WideChevron } from '../icons/WideChevron';
 
 export default {
@@ -13,7 +13,7 @@ const Template: ComponentStory<typeof WideChevron> = (args) => <WideChevron {...
 
 export const BlueEastRounded = Template.bind({});
 BlueEastRounded.args = {
-  color: Color.Blue,
+  color: ColorPalette.Blue,
   direction: 'e',
   rounded: true,
   width: 50,
@@ -22,7 +22,7 @@ BlueEastRounded.args = {
 
 export const BlackSouthUnrounded = Template.bind({});
 BlackSouthUnrounded.args = {
-  color: Color.Black,
+  color: ColorPalette.Black,
   direction: 's',
   rounded: false,
   width: 50,

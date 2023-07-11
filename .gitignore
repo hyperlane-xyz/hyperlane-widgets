@@ -9,6 +9,7 @@ cache/
 /coverage
 coverage.json
 /test/outputs
+/storybook-static
 
 # production
 /artifacts

@@ -10,7 +10,7 @@ export function Circle({
   children,
 }: PropsWithChildren<{
   size: string | number;
-  title: string;
+  title?: string;
   bgColorSeed?: number;
   classes?: string;
 }>) {
