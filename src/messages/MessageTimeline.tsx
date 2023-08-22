@@ -15,7 +15,7 @@ interface Props {
   timings: StageTimings;
   timestampSent?: number;
   hideDescriptions?: boolean;
-  externalLink: string;
+  externalLink?: string;
 }
 
 export function MessageTimeline({
