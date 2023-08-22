@@ -6,6 +6,7 @@ import { EnvelopeIcon } from '../icons/Envelope';
 import { LockIcon } from '../icons/Lock';
 import { ShieldIcon } from '../icons/Shield';
 import { WideChevron } from '../icons/WideChevron';
+import { getTxExplorerUrl } from '../utils/explorers';
 
 import { MessageStatus, MessageStage as Stage, StageTimings } from './types';
 
@@ -15,6 +16,7 @@ interface Props {
   timings: StageTimings;
   timestampSent?: number;
   hideDescriptions?: boolean;
+  chainId: number;
 }
 
 export function MessageTimeline({
@@ -23,6 +25,7 @@ export function MessageTimeline({
   timings,
   timestampSent,
   hideDescriptions,
+  chainId,
 }: Props) {
   // Ignore stage value if status shows as delivered
   const stage = status === MessageStatus.Delivered ? Stage.Relayed : _stage;
@@ -31,10 +34,18 @@ export function MessageTimeline({
   const timeSentStr = timeSent
     ? `${timeSent.toLocaleDateString()} ${timeSent.toLocaleTimeString()}`
     : null;
+  const link = getTxExplorerUrl(chainId);
+
+  const onStageClickHandler = () => {
+    if (link) window.open(link, '_blank', 'noreferrer');
+  };
 
   return (
     <div className="htw-pt-14 htw-pb-1 htw-flex htw-w-full">
-      <div className={styles.stageContainer}>
+      <div
+        onClick={onStageClickHandler}
+        className={`${styles.stageContainer} ${link ? 'htw-cursor-pointer' : 'htw-cursor-auto'}`}
+      >
         <div
           className={`${styles.stageBar} htw-rounded-l ${getStageOpacityClass(
             Stage.Sent,
@@ -59,7 +70,10 @@ export function MessageTimeline({
         )}
       </div>
       <div className={styles.stageSpacer}></div>
-      <div className={styles.stageContainer}>
+      <div
+        onClick={onStageClickHandler}
+        className={`${styles.stageContainer} ${link ? 'htw-cursor-pointer' : 'htw-cursor-auto'}`}
+      >
         <div
           className={`${styles.stageBar} ${getStageOpacityClass(Stage.Finalized, stage, status)}`}
         >
@@ -79,7 +93,10 @@ export function MessageTimeline({
         )}
       </div>
       <div className={styles.stageSpacer}></div>
-      <div className={styles.stageContainer}>
+      <div
+        onClick={onStageClickHandler}
+        className={`${styles.stageContainer} ${link ? 'htw-cursor-pointer' : 'htw-cursor-auto'}`}
+      >
         <div
           className={`${styles.stageBar} ${getStageOpacityClass(Stage.Validated, stage, status)}`}
         >
@@ -99,7 +116,10 @@ export function MessageTimeline({
         )}
       </div>
       <div className={styles.stageSpacer}></div>
-      <div className={styles.stageContainer}>
+      <div
+        onClick={onStageClickHandler}
+        className={`${styles.stageContainer} ${link ? 'htw-cursor-pointer' : 'htw-cursor-auto'}`}
+      >
         <div
           className={`${styles.stageBar} htw-rounded-r ${getStageOpacityClass(
             Stage.Relayed,
