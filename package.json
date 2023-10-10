@@ -4,13 +4,13 @@
   "version": "1.5.0",
   "author": "J M Rossy",
   "peerDependencies": {
-    "@hyperlane-xyz/sdk": "1.5.5-beta0",
+    "@hyperlane-xyz/sdk": "1.5.7-beta1",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
-    "@hyperlane-xyz/sdk": "1.5.0",
+    "@hyperlane-xyz/sdk": "1.5.7-beta1",
     "@mdx-js/react": "^1.6.22",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-docs": "^6.5.15",

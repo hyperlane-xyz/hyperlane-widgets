@@ -1,5 +1,6 @@
 export { default as Arbitrum } from './Arbitrum';
 export { default as Avalanche } from './Avalanche';
+export { default as Base } from './Base';
 export { default as Bsc } from './Bsc';
 export { default as Celo } from './Celo';
 export { default as Eclipse } from './Eclipse';
@@ -10,4 +11,6 @@ export { default as Moonbeam } from './Moonbeam';
 export { default as Near } from './Near';
 export { default as Optimism } from './Optimism';
 export { default as Polygon } from './Polygon';
+export { default as Polygonzkevm } from './Polygonzkevm';
+export { default as Scroll } from './Scroll';
 export { default as Solana } from './Solana';

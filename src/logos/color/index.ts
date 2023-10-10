@@ -10,6 +10,6 @@ export { default as Hyperlane } from './Hyperlane';
 export { default as Moonbeam } from './Moonbeam';
 export { default as Optimism } from './Optimism';
 export { default as Polygon } from './Polygon';
-export { default as PolygonZkevm } from './PolygonZkevm';
+export { default as Polygonzkevm } from './Polygonzkevm';
 export { default as Scroll } from './Scroll';
 export { default as Solana } from './Solana';

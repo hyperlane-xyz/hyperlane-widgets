@@ -2267,24 +2267,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/core@npm:1.5.0":
-  version: 1.5.0
-  resolution: "@hyperlane-xyz/core@npm:1.5.0"
+"@hyperlane-xyz/core@npm:1.5.7-beta1":
+  version: 1.5.7-beta1
+  resolution: "@hyperlane-xyz/core@npm:1.5.7-beta1"
   dependencies:
     "@eth-optimism/contracts": ^0.6.0
-    "@hyperlane-xyz/utils": 1.5.0
+    "@hyperlane-xyz/utils": 1.5.7-beta1
     "@openzeppelin/contracts": ^4.8.0
     "@openzeppelin/contracts-upgradeable": ^4.8.0
-  checksum: c086bdec32545f40268b18c7975ba2106702177743e797e390f0fae52f7b183db5b637b37299e5e98dd7f322a620adda955fe50ec8dc2a77bef591702732a726
+  checksum: df98d351362dc94b494ee02dcbba969b2710e4becccc91a3f3b6d141b91ba091a7394a55c80ae72d892555ddf09537c81c13bcc5b8b1679560b655c9eaa84278
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/sdk@npm:1.5.0":
-  version: 1.5.0
-  resolution: "@hyperlane-xyz/sdk@npm:1.5.0"
+"@hyperlane-xyz/sdk@npm:1.5.7-beta1":
+  version: 1.5.7-beta1
+  resolution: "@hyperlane-xyz/sdk@npm:1.5.7-beta1"
   dependencies:
-    "@hyperlane-xyz/core": 1.5.0
-    "@hyperlane-xyz/utils": 1.5.0
+    "@hyperlane-xyz/core": 1.5.7-beta1
+    "@hyperlane-xyz/utils": 1.5.7-beta1
+    "@solana/spl-token": ^0.3.8
     "@solana/web3.js": ^1.78.0
     "@types/coingecko-api": ^1.0.10
     "@types/debug": ^4.1.7
@@ -2295,18 +2296,18 @@ __metadata:
     ethers: ^5.7.2
     viem: ^1.3.1
     zod: ^3.21.2
-  checksum: 5d79f93cf648e08fe555410f71b0c7fad8c0a57d76fc393e90b14e35527f77a36a98ae7c92ba46fb7bae26c5e0b0a157f07199844ffba9723d87e2897dad5a2b
+  checksum: f170bab0939c8894de9ab10c35750b20eb2346e227a5f62e2c3308d9f07e7dc3ded9e93a714396783615626525a08c67746c6b2a428d5ef6518c30cef78e0f8a
   languageName: node
   linkType: hard
 
-"@hyperlane-xyz/utils@npm:1.5.0":
-  version: 1.5.0
-  resolution: "@hyperlane-xyz/utils@npm:1.5.0"
+"@hyperlane-xyz/utils@npm:1.5.7-beta1":
+  version: 1.5.7-beta1
+  resolution: "@hyperlane-xyz/utils@npm:1.5.7-beta1"
   dependencies:
     "@solana/web3.js": ^1.78.0
     bignumber.js: ^9.1.1
     ethers: ^5.7.2
-  checksum: 6701b1b9f440f32bed69b44fee2df458c27fe3d63786291733ce0257aa3252f773e035058005aabcb1e7a936833aa1ee86e8230095fad611a800c4631b9b73e3
+  checksum: d4c4cc788ea877edb1f33cec117553b4b4b08822f7b5f9cd69d5abbce202f20f9c9533f58dbb8d5a92d3e4d995f230536f1668ec1bc6f71a6067517f2c1ff7d3
   languageName: node
   linkType: hard
 
@@ -2315,7 +2316,7 @@ __metadata:
   resolution: "@hyperlane-xyz/widgets@workspace:."
   dependencies:
     "@babel/core": ^7.20.12
-    "@hyperlane-xyz/sdk": 1.5.0
+    "@hyperlane-xyz/sdk": 1.5.7-beta1
     "@mdx-js/react": ^1.6.22
     "@storybook/addon-actions": ^6.5.15
     "@storybook/addon-docs": ^6.5.15
@@ -2346,7 +2347,7 @@ __metadata:
     ts-node: ^10.8.0
     typescript: ^5.1.6
   peerDependencies:
-    "@hyperlane-xyz/sdk": 1.5.5-beta0
+    "@hyperlane-xyz/sdk": 1.5.7-beta1
     react: ^18
     react-dom: ^18
   languageName: unknown
@@ -2546,7 +2547,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@noble/curves@npm:1.2.0, @noble/curves@npm:^1.0.0, @noble/curves@npm:~1.2.0":
+"@noble/curves@npm:1.2.0, @noble/curves@npm:^1.0.0, @noble/curves@npm:^1.2.0, @noble/curves@npm:~1.2.0":
   version: 1.2.0
   resolution: "@noble/curves@npm:1.2.0"
   dependencies:
@@ -2717,12 +2718,60 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@solana/buffer-layout-utils@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@solana/buffer-layout-utils@npm:0.2.0"
+  dependencies:
+    "@solana/buffer-layout": ^4.0.0
+    "@solana/web3.js": ^1.32.0
+    bigint-buffer: ^1.1.5
+    bignumber.js: ^9.0.1
+  checksum: 9284242245b18b49577195ba7548263850be865a4a2d183944fa01bb76382039db589aab8473698e9bb734b515ada9b4d70db0a72e341c5d567c59b83d6d0840
+  languageName: node
+  linkType: hard
+
 "@solana/buffer-layout@npm:^4.0.0":
   version: 4.0.1
   resolution: "@solana/buffer-layout@npm:4.0.1"
   dependencies:
     buffer: ~6.0.3
   checksum: bf846888e813187243d4008a7a9f58b49d16cbd995b9d7f1b72898aa510ed77b1ce5e8468e7b2fd26dd81e557a4e74a666e21fccb95f123c1f740d41138bbacd
+  languageName: node
+  linkType: hard
+
+"@solana/spl-token@npm:^0.3.8":
+  version: 0.3.8
+  resolution: "@solana/spl-token@npm:0.3.8"
+  dependencies:
+    "@solana/buffer-layout": ^4.0.0
+    "@solana/buffer-layout-utils": ^0.2.0
+    buffer: ^6.0.3
+  peerDependencies:
+    "@solana/web3.js": ^1.47.4
+  checksum: 01f4f87112b0ad277701a3bcb8e03069b69449b92724b17959107686731082bfd3475b5f105e1e8f04badd2e810a43d5ef811744ced5178eea1232de8fd75147
+  languageName: node
+  linkType: hard
+
+"@solana/web3.js@npm:^1.32.0":
+  version: 1.87.1
+  resolution: "@solana/web3.js@npm:1.87.1"
+  dependencies:
+    "@babel/runtime": ^7.22.6
+    "@noble/curves": ^1.2.0
+    "@noble/hashes": ^1.3.1
+    "@solana/buffer-layout": ^4.0.0
+    agentkeepalive: ^4.3.0
+    bigint-buffer: ^1.1.5
+    bn.js: ^5.2.1
+    borsh: ^0.7.0
+    bs58: ^4.0.1
+    buffer: 6.0.3
+    fast-stable-stringify: ^1.0.0
+    jayson: ^4.1.0
+    node-fetch: ^2.6.12
+    rpc-websockets: ^7.5.1
+    superstruct: ^0.14.2
+  checksum: 7e8ae7775f0df82d7d796befd1f2f95482e5935e6879dba7aa6c65093cb7a09158b965e3aba15e218c2652efaa7ec77c2287c01f343e4ec08afd1a298c16a039
   languageName: node
   linkType: hard
 
@@ -5990,7 +6039,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bignumber.js@npm:^9.1.1":
+"bignumber.js@npm:^9.0.1, bignumber.js@npm:^9.1.1":
   version: 9.1.2
   resolution: "bignumber.js@npm:9.1.2"
   checksum: 582c03af77ec9cb0ebd682a373ee6c66475db94a4325f92299621d544aa4bd45cb45fd60001610e94aef8ae98a0905fa538241d9638d4422d57abbeeac6fadaf
@@ -6276,7 +6325,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"buffer@npm:6.0.3, buffer@npm:~6.0.3":
+"buffer@npm:6.0.3, buffer@npm:^6.0.3, buffer@npm:~6.0.3":
   version: 6.0.3
   resolution: "buffer@npm:6.0.3"
   dependencies:
