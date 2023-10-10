@@ -4,7 +4,7 @@
   "version": "1.5.0",
   "author": "J M Rossy",
   "peerDependencies": {
-    "@hyperlane-xyz/sdk": "^1.4",
+    "@hyperlane-xyz/sdk": "1.5.5-beta0",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -28,8 +28,8 @@
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@types/ws": "^8.5.5",
-    "@typescript-eslint/eslint-plugin": "^5.27.0",
-    "@typescript-eslint/parser": "^5.27.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
     "babel-loader": "^8.3.0",
     "eslint": "^8.16.0",
     "eslint-config-prettier": "^8.5.0",

@@ -5,6 +5,7 @@ import { solana, solanatestnet } from '@hyperlane-xyz/sdk/dist/consts/chainMetad
 
 import ArbitrumBlack from '../logos/black/Arbitrum';
 import AvalancheBlack from '../logos/black/Avalanche';
+import BaseBlack from '../logos/black/Base';
 import BscBlack from '../logos/black/Bsc';
 import CeloBlack from '../logos/black/Celo';
 import EthereumBlack from '../logos/black/Ethereum';
@@ -12,9 +13,12 @@ import GnosisBlack from '../logos/black/Gnosis';
 import MoonbeamBlack from '../logos/black/Moonbeam';
 import OptimismBlack from '../logos/black/Optimism';
 import PolygonBlack from '../logos/black/Polygon';
+import PolygonZkevmBlack from '../logos/black/PolygonZkevm';
+import ScrollBlack from '../logos/black/Scroll';
 import SolanaBlack from '../logos/black/Solana';
 import ArbitrumColor from '../logos/color/Arbitrum';
 import AvalancheColor from '../logos/color/Avalanche';
+import BaseColor from '../logos/color/Base';
 import BscColor from '../logos/color/Bsc';
 import CeloColor from '../logos/color/Celo';
 import EthereumColor from '../logos/color/Ethereum';
@@ -22,6 +26,8 @@ import GnosisColor from '../logos/color/Gnosis';
 import MoonbeamColor from '../logos/color/Moonbeam';
 import OptimismColor from '../logos/color/Optimism';
 import PolygonColor from '../logos/color/Polygon';
+import PolygonZkevmColor from '../logos/color/PolygonZkevm';
+import ScrollColor from '../logos/color/Scroll';
 import SolanaColor from '../logos/color/Solana';
 
 import { Circle } from './Circle';
@@ -36,6 +42,7 @@ const CHAIN_TO_LOGO: Record<number, { black: SvgIcon; color: SvgIcon }> = {
   [chainMetadata.arbitrum.chainId]: { black: ArbitrumBlack, color: ArbitrumColor },
   [chainMetadata.arbitrumgoerli.chainId]: { black: ArbitrumBlack, color: ArbitrumColor },
   [chainMetadata.avalanche.chainId]: { black: AvalancheBlack, color: AvalancheColor },
+  [chainMetadata.basegoerli.chainId]: { black: BaseBlack, color: BaseColor },
   [chainMetadata.bsc.chainId]: { black: BscBlack, color: BscColor },
   [chainMetadata.bsctestnet.chainId]: { black: BscBlack, color: BscColor },
   [chainMetadata.celo.chainId]: { black: CeloBlack, color: CeloColor },
@@ -49,6 +56,11 @@ const CHAIN_TO_LOGO: Record<number, { black: SvgIcon; color: SvgIcon }> = {
   [chainMetadata.optimism.chainId]: { black: OptimismBlack, color: OptimismColor },
   [chainMetadata.optimismgoerli.chainId]: { black: OptimismBlack, color: OptimismColor },
   [chainMetadata.polygon.chainId]: { black: PolygonBlack, color: PolygonColor },
+  [chainMetadata.polygonzkemvtestnet.chainId]: {
+    black: PolygonZkevmBlack,
+    color: PolygonZkevmColor,
+  },
+  [chainMetadata.scrollsepolia.chainId]: { black: ScrollBlack, color: ScrollColor },
   [chainMetadata.sepolia.chainId]: { black: EthereumBlack, color: EthereumColor },
   // TODO replace with access via chainMetadata when it's added there
   [solana.chainId]: { black: SolanaBlack, color: SolanaColor },
