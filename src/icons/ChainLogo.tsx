@@ -56,7 +56,7 @@ const CHAIN_TO_LOGO: Record<number, { black: SvgIcon; color: SvgIcon }> = {
   [chainMetadata.optimism.chainId]: { black: OptimismBlack, color: OptimismColor },
   [chainMetadata.optimismgoerli.chainId]: { black: OptimismBlack, color: OptimismColor },
   [chainMetadata.polygon.chainId]: { black: PolygonBlack, color: PolygonColor },
-  [chainMetadata.polygonzkemvtestnet.chainId]: {
+  [chainMetadata.polygonzkevmtestnet.chainId]: {
     black: PolygonZkevmBlack,
     color: PolygonZkevmColor,
   },
