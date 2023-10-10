@@ -1,7 +1,7 @@
 {
   "name": "@hyperlane-xyz/widgets",
   "description": "Common react components for Hyperlane projects",
-  "version": "1.5.7-beta4",
+  "version": "1.5.7-beta8",
   "author": "J M Rossy",
   "peerDependencies": {
     "@hyperlane-xyz/sdk": "1.5.7-beta1",
@@ -75,7 +75,7 @@
     "url": "https://github.com/hyperlane-xyz/hyperlane-widgets"
   },
   "scripts": {
-    "build": "yarn build:svg && yarn build:cjs && yarn build:esm && yarn build:css",
+    "build": " yarn build:cjs && yarn build:esm && yarn build:css",
     "build:cjs": "tsc --project ./tsconfig.json",
     "build:esm": "tsc --project ./tsconfig.esm.json",
     "build:css": "tailwindcss -c ./tailwind.config.js -i ./src/styles.css -o ./dist/styles.css --minify",
