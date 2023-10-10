@@ -1,7 +1,7 @@
 {
   "name": "@hyperlane-xyz/widgets",
   "description": "Common react components for Hyperlane projects",
-  "version": "1.5.0",
+  "version": "1.5.7-beta1",
   "author": "J M Rossy",
   "peerDependencies": {
     "@hyperlane-xyz/sdk": "1.5.7-beta1",
@@ -85,5 +85,6 @@
     "prettier": "prettier --write ./src",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
-  }
+  },
+  "stableVersion": "1.5.0"
 }

@@ -13,7 +13,7 @@ import GnosisBlack from '../logos/black/Gnosis';
 import MoonbeamBlack from '../logos/black/Moonbeam';
 import OptimismBlack from '../logos/black/Optimism';
 import PolygonBlack from '../logos/black/Polygon';
-import PolygonZkevmBlack from '../logos/black/PolygonZkevm';
+import PolygonZkevmBlack from '../logos/black/Polygonzkevm';
 import ScrollBlack from '../logos/black/Scroll';
 import SolanaBlack from '../logos/black/Solana';
 import ArbitrumColor from '../logos/color/Arbitrum';
@@ -26,7 +26,7 @@ import GnosisColor from '../logos/color/Gnosis';
 import MoonbeamColor from '../logos/color/Moonbeam';
 import OptimismColor from '../logos/color/Optimism';
 import PolygonColor from '../logos/color/Polygon';
-import PolygonZkevmColor from '../logos/color/PolygonZkevm';
+import PolygonZkevmColor from '../logos/color/Polygonzkevm';
 import ScrollColor from '../logos/color/Scroll';
 import SolanaColor from '../logos/color/Solana';
 
