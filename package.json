@@ -1,7 +1,7 @@
 {
   "name": "@hyperlane-xyz/widgets",
   "description": "Common react components for Hyperlane projects",
-  "version": "1.5.7-beta1",
+  "version": "1.5.7-beta4",
   "author": "J M Rossy",
   "peerDependencies": {
     "@hyperlane-xyz/sdk": "1.5.7-beta1",
