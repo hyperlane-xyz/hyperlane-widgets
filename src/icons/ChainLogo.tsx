@@ -1,27 +1,36 @@
 import React, { ReactElement, memo } from 'react';
 
 import { chainMetadata } from '@hyperlane-xyz/sdk';
-import { solana, solanatestnet } from '@hyperlane-xyz/sdk/dist/consts/chainMetadata';
 
 import ArbitrumBlack from '../logos/black/Arbitrum';
 import AvalancheBlack from '../logos/black/Avalanche';
+import BaseBlack from '../logos/black/Base';
 import BscBlack from '../logos/black/Bsc';
 import CeloBlack from '../logos/black/Celo';
 import EthereumBlack from '../logos/black/Ethereum';
 import GnosisBlack from '../logos/black/Gnosis';
+import MantaBlack from '../logos/black/Manta';
 import MoonbeamBlack from '../logos/black/Moonbeam';
+import NeutronBlack from '../logos/black/Neutron';
 import OptimismBlack from '../logos/black/Optimism';
 import PolygonBlack from '../logos/black/Polygon';
+import PolygonzkevmBlack from '../logos/black/Polygonzkevm';
+import ScrollBlack from '../logos/black/Scroll';
 import SolanaBlack from '../logos/black/Solana';
 import ArbitrumColor from '../logos/color/Arbitrum';
 import AvalancheColor from '../logos/color/Avalanche';
+import BaseColor from '../logos/color/Base';
 import BscColor from '../logos/color/Bsc';
 import CeloColor from '../logos/color/Celo';
 import EthereumColor from '../logos/color/Ethereum';
 import GnosisColor from '../logos/color/Gnosis';
+import MantaColor from '../logos/color/Manta';
 import MoonbeamColor from '../logos/color/Moonbeam';
+import NeutronColor from '../logos/color/Neutron';
 import OptimismColor from '../logos/color/Optimism';
 import PolygonColor from '../logos/color/Polygon';
+import PolygonzkevmColor from '../logos/color/Polygonzkevm';
+import ScrollColor from '../logos/color/Scroll';
 import SolanaColor from '../logos/color/Solana';
 
 import { Circle } from './Circle';
@@ -36,23 +45,33 @@ const CHAIN_TO_LOGO: Record<number, { black: SvgIcon; color: SvgIcon }> = {
   [chainMetadata.arbitrum.chainId]: { black: ArbitrumBlack, color: ArbitrumColor },
   [chainMetadata.arbitrumgoerli.chainId]: { black: ArbitrumBlack, color: ArbitrumColor },
   [chainMetadata.avalanche.chainId]: { black: AvalancheBlack, color: AvalancheColor },
+  [chainMetadata.base.chainId]: { black: BaseBlack, color: BaseColor },
+  [chainMetadata.basegoerli.chainId]: { black: BaseBlack, color: BaseColor },
   [chainMetadata.bsc.chainId]: { black: BscBlack, color: BscColor },
   [chainMetadata.bsctestnet.chainId]: { black: BscBlack, color: BscColor },
   [chainMetadata.celo.chainId]: { black: CeloBlack, color: CeloColor },
+  [chainMetadata.chiado.chainId]: { black: GnosisBlack, color: GnosisColor },
   [chainMetadata.ethereum.chainId]: { black: EthereumBlack, color: EthereumColor },
   [chainMetadata.fuji.chainId]: { black: AvalancheBlack, color: AvalancheColor },
   [chainMetadata.gnosis.chainId]: { black: GnosisBlack, color: GnosisColor },
   [chainMetadata.goerli.chainId]: { black: EthereumBlack, color: EthereumColor },
+  [chainMetadata.mantapacific.chainId]: { black: MantaBlack, color: MantaColor },
   [chainMetadata.moonbasealpha.chainId]: { black: MoonbeamBlack, color: MoonbeamColor },
   [chainMetadata.moonbeam.chainId]: { black: MoonbeamBlack, color: MoonbeamColor },
   [chainMetadata.mumbai.chainId]: { black: PolygonBlack, color: PolygonColor },
+  [chainMetadata.neutron.chainId]: { black: NeutronBlack, color: NeutronColor },
   [chainMetadata.optimism.chainId]: { black: OptimismBlack, color: OptimismColor },
   [chainMetadata.optimismgoerli.chainId]: { black: OptimismBlack, color: OptimismColor },
   [chainMetadata.polygon.chainId]: { black: PolygonBlack, color: PolygonColor },
+  [chainMetadata.polygonzkevm.chainId]: { black: PolygonzkevmBlack, color: PolygonzkevmColor },
+  [chainMetadata.polygonzkevmtestnet.chainId]: {
+    black: PolygonzkevmBlack,
+    color: PolygonzkevmColor,
+  },
+  [chainMetadata.scroll.chainId]: { black: ScrollBlack, color: ScrollColor },
+  [chainMetadata.scrollsepolia.chainId]: { black: ScrollBlack, color: ScrollColor },
   [chainMetadata.sepolia.chainId]: { black: EthereumBlack, color: EthereumColor },
-  // TODO replace with access via chainMetadata when it's added there
-  [solana.chainId]: { black: SolanaBlack, color: SolanaColor },
-  [solanatestnet.chainId]: { black: SolanaBlack, color: SolanaColor },
+  [chainMetadata.solana.chainId]: { black: SolanaBlack, color: SolanaColor },
   [chainMetadata.solanadevnet.chainId]: { black: SolanaBlack, color: SolanaColor },
 };
 
