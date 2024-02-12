@@ -1,7 +1,7 @@
 {
   "name": "@hyperlane-xyz/widgets",
   "description": "Common react components for Hyperlane projects",
-  "version": "3.1.4",
+  "version": "3.7.0",
   "author": "J M Rossy",
   "peerDependencies": {
     "@hyperlane-xyz/sdk": "^3.1",
@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
-    "@hyperlane-xyz/sdk": "3.1.4",
+    "@hyperlane-xyz/sdk": "3.7.0",
     "@mdx-js/react": "^1.6.22",
     "@storybook/addon-actions": "^6.5.15",
     "@storybook/addon-docs": "^6.5.15",
@@ -69,7 +69,7 @@
     "Typescript"
   ],
   "license": "Apache-2.0",
-  "packageManager": "yarn@3.2.0",
+  "packageManager": "yarn@4.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/hyperlane-xyz/hyperlane-widgets"

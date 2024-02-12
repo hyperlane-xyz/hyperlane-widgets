@@ -9,14 +9,18 @@ import BscBlack from '../logos/black/Bsc';
 import CeloBlack from '../logos/black/Celo';
 import EthereumBlack from '../logos/black/Ethereum';
 import GnosisBlack from '../logos/black/Gnosis';
+import InevmBlack from '../logos/black/Inevm';
+import InjectiveBlack from '../logos/black/Injective';
 import MantaBlack from '../logos/black/Manta';
 import MoonbeamBlack from '../logos/black/Moonbeam';
+import NautilusBlack from '../logos/black/Nautilus';
 import NeutronBlack from '../logos/black/Neutron';
 import OptimismBlack from '../logos/black/Optimism';
 import PolygonBlack from '../logos/black/Polygon';
 import PolygonzkevmBlack from '../logos/black/Polygonzkevm';
 import ScrollBlack from '../logos/black/Scroll';
 import SolanaBlack from '../logos/black/Solana';
+import VictionBlack from '../logos/black/Viction';
 import ArbitrumColor from '../logos/color/Arbitrum';
 import AvalancheColor from '../logos/color/Avalanche';
 import BaseColor from '../logos/color/Base';
@@ -24,14 +28,18 @@ import BscColor from '../logos/color/Bsc';
 import CeloColor from '../logos/color/Celo';
 import EthereumColor from '../logos/color/Ethereum';
 import GnosisColor from '../logos/color/Gnosis';
+import InevmColor from '../logos/color/Inevm';
+import InjectiveColor from '../logos/color/Injective';
 import MantaColor from '../logos/color/Manta';
 import MoonbeamColor from '../logos/color/Moonbeam';
+import NautilusColor from '../logos/color/Nautilus';
 import NeutronColor from '../logos/color/Neutron';
 import OptimismColor from '../logos/color/Optimism';
 import PolygonColor from '../logos/color/Polygon';
 import PolygonzkevmColor from '../logos/color/Polygonzkevm';
 import ScrollColor from '../logos/color/Scroll';
 import SolanaColor from '../logos/color/Solana';
+import VictionColor from '../logos/color/Viction';
 
 import { Circle } from './Circle';
 import { QuestionMarkIcon } from './QuestionMark';
@@ -40,7 +48,7 @@ type SvgIcon = (props: { width: number; height: number; title?: string }) => Rea
 
 // Keep up to date as new chains are added or
 // icon will fallback to default (question mark)
-const CHAIN_TO_LOGO: Record<number, { black: SvgIcon; color: SvgIcon }> = {
+const CHAIN_TO_LOGO: Record<string | number, { black: SvgIcon; color: SvgIcon }> = {
   [chainMetadata.alfajores.chainId]: { black: CeloBlack, color: CeloColor },
   [chainMetadata.arbitrum.chainId]: { black: ArbitrumBlack, color: ArbitrumColor },
   [chainMetadata.arbitrumgoerli.chainId]: { black: ArbitrumBlack, color: ArbitrumColor },
@@ -55,10 +63,13 @@ const CHAIN_TO_LOGO: Record<number, { black: SvgIcon; color: SvgIcon }> = {
   [chainMetadata.fuji.chainId]: { black: AvalancheBlack, color: AvalancheColor },
   [chainMetadata.gnosis.chainId]: { black: GnosisBlack, color: GnosisColor },
   [chainMetadata.goerli.chainId]: { black: EthereumBlack, color: EthereumColor },
+  [chainMetadata.inevm.chainId]: { black: InevmBlack, color: InevmColor },
+  [chainMetadata.injective.chainId]: { black: InjectiveBlack, color: InjectiveColor },
   [chainMetadata.mantapacific.chainId]: { black: MantaBlack, color: MantaColor },
   [chainMetadata.moonbasealpha.chainId]: { black: MoonbeamBlack, color: MoonbeamColor },
   [chainMetadata.moonbeam.chainId]: { black: MoonbeamBlack, color: MoonbeamColor },
   [chainMetadata.mumbai.chainId]: { black: PolygonBlack, color: PolygonColor },
+  [chainMetadata.nautilus.chainId]: { black: NautilusBlack, color: NautilusColor },
   [chainMetadata.neutron.chainId]: { black: NeutronBlack, color: NeutronColor },
   [chainMetadata.optimism.chainId]: { black: OptimismBlack, color: OptimismColor },
   [chainMetadata.optimismgoerli.chainId]: { black: OptimismBlack, color: OptimismColor },
@@ -73,6 +84,7 @@ const CHAIN_TO_LOGO: Record<number, { black: SvgIcon; color: SvgIcon }> = {
   [chainMetadata.sepolia.chainId]: { black: EthereumBlack, color: EthereumColor },
   [chainMetadata.solana.chainId]: { black: SolanaBlack, color: SolanaColor },
   [chainMetadata.solanadevnet.chainId]: { black: SolanaBlack, color: SolanaColor },
+  [chainMetadata.viction.chainId]: { black: VictionBlack, color: VictionColor },
 };
 
 export interface ChainLogoProps {
