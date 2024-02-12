@@ -54,5 +54,10 @@ ChainIdAndName.args = {
   chainId: 422220,
 };
 
+export const ChainIdString = Template.bind({});
+ChainIdAndName.args = {
+  chainId: 'injective-1',
+};
+
 export const NoIdNoName = Template.bind({});
 NoIdNoName.args = {};
