@@ -1,6 +1,7 @@
 import React, { ReactElement, memo } from 'react';
 
 import { chainMetadata } from '@hyperlane-xyz/sdk';
+import { isNumeric } from '@hyperlane-xyz/utils';
 
 import ArbitrumBlack from '../logos/black/Arbitrum';
 import AvalancheBlack from '../logos/black/Avalanche';
@@ -88,7 +89,7 @@ const CHAIN_TO_LOGO: Record<string | number, { black: SvgIcon; color: SvgIcon }>
 };
 
 export interface ChainLogoProps {
-  chainId?: number;
+  chainId?: number | string;
   chainName?: string;
   size?: number;
   color?: boolean;
@@ -108,10 +109,11 @@ function _ChainLogo({
   const title = chainName || chainId?.toString() || 'Unknown';
   const iconSize = Math.floor(size / 1.9);
   const ImageNode = icon ?? (chainId ? CHAIN_TO_LOGO[chainId]?.[colorType] : null);
+  const bgColorSeed = chainId && isNumeric(chainId) ? parseInt(chainId.toString(), 10) : 0;
 
   if (!ImageNode) {
     return (
-      <Circle size={size} title={title} bgColorSeed={chainId || 0}>
+      <Circle size={size} title={title} bgColorSeed={bgColorSeed}>
         {chainName ? (
           <div style={{ fontSize: iconSize }}>{chainName[0].toUpperCase()}</div>
         ) : (
