@@ -16,6 +16,7 @@ export { default as Moonbeam } from './Moonbeam';
 export { default as Nautilus } from './Nautilus';
 export { default as Neutron } from './Neutron';
 export { default as Optimism } from './Optimism';
+export { default as Plume } from './Plume';
 export { default as Polygon } from './Polygon';
 export { default as Polygonzkevm } from './Polygonzkevm';
 export { default as Scroll } from './Scroll';
