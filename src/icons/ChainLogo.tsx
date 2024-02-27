@@ -1,6 +1,6 @@
 import React, { ReactElement, memo } from 'react';
 
-import { chainMetadata } from '@hyperlane-xyz/sdk';
+import { Chains, chainMetadata } from '@hyperlane-xyz/sdk';
 import { isNumeric } from '@hyperlane-xyz/utils';
 
 import ArbitrumBlack from '../logos/black/Arbitrum';
@@ -17,6 +17,7 @@ import MoonbeamBlack from '../logos/black/Moonbeam';
 import NautilusBlack from '../logos/black/Nautilus';
 import NeutronBlack from '../logos/black/Neutron';
 import OptimismBlack from '../logos/black/Optimism';
+import PlumeBlack from '../logos/black/Plume';
 import PolygonBlack from '../logos/black/Polygon';
 import PolygonzkevmBlack from '../logos/black/Polygonzkevm';
 import ScrollBlack from '../logos/black/Scroll';
@@ -36,6 +37,7 @@ import MoonbeamColor from '../logos/color/Moonbeam';
 import NautilusColor from '../logos/color/Nautilus';
 import NeutronColor from '../logos/color/Neutron';
 import OptimismColor from '../logos/color/Optimism';
+import PlumeColor from '../logos/color/Plume';
 import PolygonColor from '../logos/color/Polygon';
 import PolygonzkevmColor from '../logos/color/Polygonzkevm';
 import ScrollColor from '../logos/color/Scroll';
@@ -50,42 +52,44 @@ type SvgIcon = (props: { width: number; height: number; title?: string }) => Rea
 // Keep up to date as new chains are added or
 // icon will fallback to default (question mark)
 const CHAIN_TO_LOGO: Record<string | number, { black: SvgIcon; color: SvgIcon }> = {
-  [chainMetadata.alfajores.chainId]: { black: CeloBlack, color: CeloColor },
-  [chainMetadata.arbitrum.chainId]: { black: ArbitrumBlack, color: ArbitrumColor },
-  [chainMetadata.arbitrumgoerli.chainId]: { black: ArbitrumBlack, color: ArbitrumColor },
-  [chainMetadata.avalanche.chainId]: { black: AvalancheBlack, color: AvalancheColor },
-  [chainMetadata.base.chainId]: { black: BaseBlack, color: BaseColor },
-  [chainMetadata.basegoerli.chainId]: { black: BaseBlack, color: BaseColor },
-  [chainMetadata.bsc.chainId]: { black: BscBlack, color: BscColor },
-  [chainMetadata.bsctestnet.chainId]: { black: BscBlack, color: BscColor },
-  [chainMetadata.celo.chainId]: { black: CeloBlack, color: CeloColor },
-  [chainMetadata.chiado.chainId]: { black: GnosisBlack, color: GnosisColor },
-  [chainMetadata.ethereum.chainId]: { black: EthereumBlack, color: EthereumColor },
-  [chainMetadata.fuji.chainId]: { black: AvalancheBlack, color: AvalancheColor },
-  [chainMetadata.gnosis.chainId]: { black: GnosisBlack, color: GnosisColor },
-  [chainMetadata.goerli.chainId]: { black: EthereumBlack, color: EthereumColor },
-  [chainMetadata.inevm.chainId]: { black: InevmBlack, color: InevmColor },
-  [chainMetadata.injective.chainId]: { black: InjectiveBlack, color: InjectiveColor },
-  [chainMetadata.mantapacific.chainId]: { black: MantaBlack, color: MantaColor },
-  [chainMetadata.moonbasealpha.chainId]: { black: MoonbeamBlack, color: MoonbeamColor },
-  [chainMetadata.moonbeam.chainId]: { black: MoonbeamBlack, color: MoonbeamColor },
-  [chainMetadata.mumbai.chainId]: { black: PolygonBlack, color: PolygonColor },
-  [chainMetadata.nautilus.chainId]: { black: NautilusBlack, color: NautilusColor },
-  [chainMetadata.neutron.chainId]: { black: NeutronBlack, color: NeutronColor },
-  [chainMetadata.optimism.chainId]: { black: OptimismBlack, color: OptimismColor },
-  [chainMetadata.optimismgoerli.chainId]: { black: OptimismBlack, color: OptimismColor },
-  [chainMetadata.polygon.chainId]: { black: PolygonBlack, color: PolygonColor },
-  [chainMetadata.polygonzkevm.chainId]: { black: PolygonzkevmBlack, color: PolygonzkevmColor },
-  [chainMetadata.polygonzkevmtestnet.chainId]: {
+  [chainMetadata[Chains.alfajores].chainId]: { black: CeloBlack, color: CeloColor },
+  [chainMetadata[Chains.arbitrum].chainId]: { black: ArbitrumBlack, color: ArbitrumColor },
+  [chainMetadata[Chains.arbitrumgoerli].chainId]: { black: ArbitrumBlack, color: ArbitrumColor },
+  [chainMetadata[Chains.avalanche].chainId]: { black: AvalancheBlack, color: AvalancheColor },
+  [chainMetadata[Chains.base].chainId]: { black: BaseBlack, color: BaseColor },
+  [chainMetadata[Chains.bsc].chainId]: { black: BscBlack, color: BscColor },
+  [chainMetadata[Chains.bsctestnet].chainId]: { black: BscBlack, color: BscColor },
+  [chainMetadata[Chains.celo].chainId]: { black: CeloBlack, color: CeloColor },
+  [chainMetadata[Chains.chiado].chainId]: { black: GnosisBlack, color: GnosisColor },
+  [chainMetadata[Chains.ethereum].chainId]: { black: EthereumBlack, color: EthereumColor },
+  [chainMetadata[Chains.fuji].chainId]: { black: AvalancheBlack, color: AvalancheColor },
+  [chainMetadata[Chains.gnosis].chainId]: { black: GnosisBlack, color: GnosisColor },
+  [chainMetadata[Chains.goerli].chainId]: { black: EthereumBlack, color: EthereumColor },
+  [chainMetadata[Chains.inevm].chainId]: { black: InevmBlack, color: InevmColor },
+  [chainMetadata[Chains.injective].chainId]: { black: InjectiveBlack, color: InjectiveColor },
+  [chainMetadata[Chains.mantapacific].chainId]: { black: MantaBlack, color: MantaColor },
+  [chainMetadata[Chains.moonbeam].chainId]: { black: MoonbeamBlack, color: MoonbeamColor },
+  [chainMetadata[Chains.mumbai].chainId]: { black: PolygonBlack, color: PolygonColor },
+  [chainMetadata[Chains.nautilus].chainId]: { black: NautilusBlack, color: NautilusColor },
+  [chainMetadata[Chains.neutron].chainId]: { black: NeutronBlack, color: NeutronColor },
+  [chainMetadata[Chains.optimism].chainId]: { black: OptimismBlack, color: OptimismColor },
+  [chainMetadata[Chains.optimismgoerli].chainId]: { black: OptimismBlack, color: OptimismColor },
+  [chainMetadata[Chains.plumetestnet].chainId]: { black: PlumeBlack, color: PlumeColor },
+  [chainMetadata[Chains.polygon].chainId]: { black: PolygonBlack, color: PolygonColor },
+  [chainMetadata[Chains.polygonzkevm].chainId]: {
     black: PolygonzkevmBlack,
     color: PolygonzkevmColor,
   },
-  [chainMetadata.scroll.chainId]: { black: ScrollBlack, color: ScrollColor },
-  [chainMetadata.scrollsepolia.chainId]: { black: ScrollBlack, color: ScrollColor },
-  [chainMetadata.sepolia.chainId]: { black: EthereumBlack, color: EthereumColor },
-  [chainMetadata.solana.chainId]: { black: SolanaBlack, color: SolanaColor },
-  [chainMetadata.solanadevnet.chainId]: { black: SolanaBlack, color: SolanaColor },
-  [chainMetadata.viction.chainId]: { black: VictionBlack, color: VictionColor },
+  [chainMetadata[Chains.polygonzkevmtestnet].chainId]: {
+    black: PolygonzkevmBlack,
+    color: PolygonzkevmColor,
+  },
+  [chainMetadata[Chains.scroll].chainId]: { black: ScrollBlack, color: ScrollColor },
+  [chainMetadata[Chains.scrollsepolia].chainId]: { black: ScrollBlack, color: ScrollColor },
+  [chainMetadata[Chains.sepolia].chainId]: { black: EthereumBlack, color: EthereumColor },
+  [chainMetadata[Chains.solana].chainId]: { black: SolanaBlack, color: SolanaColor },
+  [chainMetadata[Chains.solanadevnet].chainId]: { black: SolanaBlack, color: SolanaColor },
+  [chainMetadata[Chains.viction].chainId]: { black: VictionBlack, color: VictionColor },
 };
 
 export interface ChainLogoProps {
