@@ -54,7 +54,6 @@ type SvgIcon = (props: { width: number; height: number; title?: string }) => Rea
 const CHAIN_TO_LOGO: Record<string | number, { black: SvgIcon; color: SvgIcon }> = {
   [chainMetadata[Chains.alfajores].chainId]: { black: CeloBlack, color: CeloColor },
   [chainMetadata[Chains.arbitrum].chainId]: { black: ArbitrumBlack, color: ArbitrumColor },
-  [chainMetadata[Chains.arbitrumgoerli].chainId]: { black: ArbitrumBlack, color: ArbitrumColor },
   [chainMetadata[Chains.avalanche].chainId]: { black: AvalancheBlack, color: AvalancheColor },
   [chainMetadata[Chains.base].chainId]: { black: BaseBlack, color: BaseColor },
   [chainMetadata[Chains.bsc].chainId]: { black: BscBlack, color: BscColor },
@@ -64,7 +63,6 @@ const CHAIN_TO_LOGO: Record<string | number, { black: SvgIcon; color: SvgIcon }>
   [chainMetadata[Chains.ethereum].chainId]: { black: EthereumBlack, color: EthereumColor },
   [chainMetadata[Chains.fuji].chainId]: { black: AvalancheBlack, color: AvalancheColor },
   [chainMetadata[Chains.gnosis].chainId]: { black: GnosisBlack, color: GnosisColor },
-  [chainMetadata[Chains.goerli].chainId]: { black: EthereumBlack, color: EthereumColor },
   [chainMetadata[Chains.inevm].chainId]: { black: InevmBlack, color: InevmColor },
   [chainMetadata[Chains.injective].chainId]: { black: InjectiveBlack, color: InjectiveColor },
   [chainMetadata[Chains.mantapacific].chainId]: { black: MantaBlack, color: MantaColor },
@@ -73,14 +71,9 @@ const CHAIN_TO_LOGO: Record<string | number, { black: SvgIcon; color: SvgIcon }>
   [chainMetadata[Chains.nautilus].chainId]: { black: NautilusBlack, color: NautilusColor },
   [chainMetadata[Chains.neutron].chainId]: { black: NeutronBlack, color: NeutronColor },
   [chainMetadata[Chains.optimism].chainId]: { black: OptimismBlack, color: OptimismColor },
-  [chainMetadata[Chains.optimismgoerli].chainId]: { black: OptimismBlack, color: OptimismColor },
   [chainMetadata[Chains.plumetestnet].chainId]: { black: PlumeBlack, color: PlumeColor },
   [chainMetadata[Chains.polygon].chainId]: { black: PolygonBlack, color: PolygonColor },
   [chainMetadata[Chains.polygonzkevm].chainId]: {
-    black: PolygonzkevmBlack,
-    color: PolygonzkevmColor,
-  },
-  [chainMetadata[Chains.polygonzkevmtestnet].chainId]: {
     black: PolygonzkevmBlack,
     color: PolygonzkevmColor,
   },
