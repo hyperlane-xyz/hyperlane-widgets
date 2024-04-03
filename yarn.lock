@@ -2970,7 +2970,7 @@ __metadata:
     typescript: "npm:^5.1.6"
     vite: "npm:^5.1.1"
   peerDependencies:
-    "@hyperlane-xyz/sdk": ^3.1
+    "@hyperlane-xyz/sdk": ^3.8
     react: ^18
     react-dom: ^18
   languageName: unknown
