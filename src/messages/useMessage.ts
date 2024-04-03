@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
 
-import { HYPERLANE_EXPLORER_API_URL } from '../consts';
-import { executeExplorerQuery } from '../utils/explorers';
-import { useInterval } from '../utils/useInterval';
+import { HYPERLANE_EXPLORER_API_URL } from '../consts.js';
+import { executeExplorerQuery } from '../utils/explorers.js';
+import { useInterval } from '../utils/useInterval.js';
 
-import { ApiMessage, MessageStatus } from './types';
+import { ApiMessage, MessageStatus } from './types.js';
 
 interface Params {
   messageId?: string;

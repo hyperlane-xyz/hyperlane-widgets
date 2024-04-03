@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { ColorPalette } from '../color';
-import { AirplaneIcon } from '../icons/Airplane';
-import { EnvelopeIcon } from '../icons/Envelope';
-import { LockIcon } from '../icons/Lock';
-import { ShieldIcon } from '../icons/Shield';
-import { WideChevron } from '../icons/WideChevron';
+import { ColorPalette } from '../color.js';
+import { AirplaneIcon } from '../icons/Airplane.js';
+import { EnvelopeIcon } from '../icons/Envelope.js';
+import { LockIcon } from '../icons/Lock.js';
+import { ShieldIcon } from '../icons/Shield.js';
+import { WideChevron } from '../icons/WideChevron.js';
 
-import { MessageStatus, MessageStage as Stage, StageTimings } from './types';
+import { MessageStatus, MessageStage as Stage, StageTimings } from './types.js';
 
 interface Props {
   status: MessageStatus;

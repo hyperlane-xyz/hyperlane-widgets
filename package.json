@@ -4,7 +4,7 @@
   "version": "3.8.0",
   "author": "J M Rossy",
   "peerDependencies": {
-    "@hyperlane-xyz/sdk": "^3.1",
+    "@hyperlane-xyz/sdk": "^3.8",
     "react": "^18",
     "react-dom": "^18"
   },
@@ -43,22 +43,12 @@
   "files": [
     "/dist"
   ],
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
-  "browser": "./dist/esm/index.js",
-  "types": "./dist/esm/index.d.ts",
+  "type": "module",
   "exports": {
-    ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js",
-      "default": "./dist/esm/index.js"
-    },
-    "./styles.css": {
-      "import": "./dist/styles.css",
-      "style": "./dist/styles.css",
-      "default": "./dist/styles.css"
-    }
+    ".": "./dist/index.js",
+    "./styles.css": "./dist/styles.css"
   },
+  "types": "./dist/index.d.ts",
   "homepage": "https://www.hyperlane.xyz",
   "keywords": [
     "Hyperlane",
@@ -74,11 +64,10 @@
     "url": "https://github.com/hyperlane-xyz/hyperlane-widgets"
   },
   "scripts": {
-    "build": "yarn build:svg && yarn build:cjs && yarn build:esm && yarn build:css",
-    "build:cjs": "tsc --project ./tsconfig.json",
-    "build:esm": "tsc --project ./tsconfig.esm.json",
-    "build:css": "tailwindcss -c ./tailwind.config.js -i ./src/styles.css -o ./dist/styles.css --minify",
-    "build:svg": "svgr --typescript --out-dir src/logos -- node_modules/@hyperlane-xyz/sdk/logos",
+    "build": "yarn build:svg && yarn build:ts && yarn build:css",
+    "build:ts": "tsc",
+    "build:css": "tailwindcss -c ./tailwind.config.cjs -i ./src/styles.css -o ./dist/styles.css --minify",
+    "build:svg": "svgr --typescript --no-index --out-dir src/logos -- node_modules/@hyperlane-xyz/sdk/logos",
     "clean": "rm -rf dist cache",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --write ./src",
