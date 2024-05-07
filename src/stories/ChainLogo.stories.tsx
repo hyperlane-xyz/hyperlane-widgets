@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { ChainLogo } from '../icons/ChainLogo';
+import { ChainLogo } from '../icons/ChainLogo.js';
 
 export default {
   title: 'ChainLogo',

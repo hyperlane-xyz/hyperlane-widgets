@@ -1,5 +1,5 @@
-import { useMessage } from './useMessage';
-import { useMessageStage } from './useMessageStage';
+import { useMessage } from './useMessage.js';
+import { useMessageStage } from './useMessageStage.js';
 
 interface Params {
   messageId?: string;

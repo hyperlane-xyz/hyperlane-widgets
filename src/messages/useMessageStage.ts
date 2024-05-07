@@ -2,12 +2,12 @@ import { useCallback, useState } from 'react';
 
 import { chainIdToMetadata } from '@hyperlane-xyz/sdk';
 
-import { HYPERLANE_EXPLORER_API_URL } from '../consts';
-import { queryExplorerForBlock } from '../utils/explorers';
-import { fetchWithTimeout } from '../utils/timeout';
-import { useInterval } from '../utils/useInterval';
+import { HYPERLANE_EXPLORER_API_URL } from '../consts.js';
+import { queryExplorerForBlock } from '../utils/explorers.js';
+import { fetchWithTimeout } from '../utils/timeout.js';
+import { useInterval } from '../utils/useInterval.js';
 
-import { MessageStatus, PartialMessage, MessageStage as Stage, StageTimings } from './types';
+import { MessageStatus, PartialMessage, MessageStage as Stage, StageTimings } from './types.js';
 
 const VALIDATION_TIME_EST = 5;
 

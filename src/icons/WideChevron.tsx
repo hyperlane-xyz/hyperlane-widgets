@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-import { ColorPalette } from '../color';
+import { ColorPalette } from '../color.js';
 
 export interface WideChevronProps {
   width?: string | number;

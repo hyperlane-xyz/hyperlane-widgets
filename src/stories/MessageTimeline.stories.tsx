@@ -1,8 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { MessageTimeline } from '../messages/MessageTimeline';
-import { MessageStage, MessageStatus } from '../messages/types';
+import { MessageTimeline } from '../messages/MessageTimeline.js';
+import { MessageStage, MessageStatus } from '../messages/types.js';
 
 export default {
   title: 'MessageTimeline',

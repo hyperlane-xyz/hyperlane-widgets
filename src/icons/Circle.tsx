@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 
-import { seedToBgColor } from '../color';
+import { seedToBgColor } from '../color.js';
 
 export function Circle({
   size,

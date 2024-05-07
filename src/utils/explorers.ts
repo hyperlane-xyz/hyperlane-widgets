@@ -1,6 +1,6 @@
 import { chainIdToMetadata } from '@hyperlane-xyz/sdk';
 
-import { fetchWithTimeout } from './timeout';
+import { fetchWithTimeout } from './timeout.js';
 
 export interface ExplorerQueryResponse<R> {
   status: string;

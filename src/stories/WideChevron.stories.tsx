@@ -1,8 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { ColorPalette } from '../color';
-import { WideChevron } from '../icons/WideChevron';
+import { ColorPalette } from '../color.js';
+import { WideChevron } from '../icons/WideChevron.js';
 
 export default {
   title: 'WideChevron',
