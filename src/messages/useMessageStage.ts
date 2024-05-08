@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import { chainIdToMetadata } from '@hyperlane-xyz/sdk';
+import type { MultiProvider } from '@hyperlane-xyz/sdk';
 
 import { HYPERLANE_EXPLORER_API_URL } from '../consts.js';
 import { queryExplorerForBlock } from '../utils/explorers.js';
@@ -10,9 +10,12 @@ import { useInterval } from '../utils/useInterval.js';
 import { MessageStatus, PartialMessage, MessageStage as Stage, StageTimings } from './types.js';
 
 const VALIDATION_TIME_EST = 5;
+const DEFAULT_BLOCK_TIME_EST = 3;
+const DEFAULT_FINALITY_BLOCKS = 3;
 
 interface Params {
   message: PartialMessage | null | undefined;
+  multiProvider: MultiProvider;
   explorerApiUrl?: string;
   retryInterval?: number;
 }
@@ -25,6 +28,7 @@ const defaultTiming: StageTimings = {
 
 export function useMessageStage({
   message,
+  multiProvider,
   explorerApiUrl = HYPERLANE_EXPLORER_API_URL,
   retryInterval = 2000,
 }: Params) {
@@ -44,7 +48,7 @@ export function useMessageStage({
     if (message.status === MessageStatus.Pending && data?.stage === Stage.Validated) return;
 
     setIsLoading(true);
-    fetchMessageState(message, explorerApiUrl)
+    fetchMessageState(message, multiProvider, explorerApiUrl)
       .then((result) => {
         setData(result);
         setError(null);
@@ -63,14 +67,20 @@ export function useMessageStage({
   };
 }
 
-async function fetchMessageState(message: PartialMessage, explorerApiUrl: string) {
-  const { status, nonce, originChainId, destinationChainId, origin, destination } = message;
+async function fetchMessageState(
+  message: PartialMessage,
+  multiProvider: MultiProvider,
+  explorerApiUrl: string,
+) {
+  const { status, nonce, originDomainId, destinationDomainId, origin, destination } = message;
   const { blockNumber: originBlockNumber, timestamp: originTimestamp } = origin;
   const destTimestamp = destination?.timestamp;
 
-  const relayEstimate = Math.floor(getBlockTimeEst(destinationChainId) * 1.5);
-  const finalityBlocks = getFinalityBlocks(originChainId);
-  const finalityEstimate = finalityBlocks * getBlockTimeEst(originChainId);
+  const relayEstimate = Math.floor(
+    (await getBlockTimeEst(destinationDomainId, multiProvider)) * 1.5,
+  );
+  const finalityBlocks = await getFinalityBlocks(originDomainId, multiProvider);
+  const finalityEstimate = finalityBlocks * (await getBlockTimeEst(originDomainId, multiProvider));
 
   if (status === MessageStatus.Delivered && destTimestamp) {
     // For delivered messages, just to rough estimates for stages
@@ -96,7 +106,7 @@ async function fetchMessageState(message: PartialMessage, explorerApiUrl: string
     };
   }
 
-  const latestNonce = await tryFetchLatestNonce(originChainId, explorerApiUrl);
+  const latestNonce = await tryFetchLatestNonce(originDomainId, multiProvider, explorerApiUrl);
   if (latestNonce && latestNonce >= nonce) {
     return {
       stage: Stage.Validated,
@@ -108,7 +118,7 @@ async function fetchMessageState(message: PartialMessage, explorerApiUrl: string
     };
   }
 
-  const latestBlock = await tryFetchChainLatestBlock(originChainId);
+  const latestBlock = await tryFetchChainLatestBlock(originDomainId, multiProvider);
   const finalizedBlock = originBlockNumber + finalityBlocks;
   if (latestBlock && parseInt(latestBlock.number.toString()) > finalizedBlock) {
     return {
@@ -131,20 +141,23 @@ async function fetchMessageState(message: PartialMessage, explorerApiUrl: string
   };
 }
 
-function getFinalityBlocks(chainId: number) {
-  const finalityBlocks = chainIdToMetadata[chainId]?.blocks?.confirmations || 0;
-  return Math.max(finalityBlocks, 1);
+async function getFinalityBlocks(domainId: number, multiProvider: MultiProvider) {
+  const metadata = await multiProvider.getChainMetadata(domainId);
+  if (metadata?.blocks?.confirmations) return metadata.blocks.confirmations;
+  else return DEFAULT_FINALITY_BLOCKS;
 }
 
-function getBlockTimeEst(chainId: number) {
-  return chainIdToMetadata[chainId]?.blocks?.estimateBlockTime || 3;
+async function getBlockTimeEst(domainId: number, multiProvider: MultiProvider) {
+  const metadata = await multiProvider.getChainMetadata(domainId);
+  return metadata?.blocks?.estimateBlockTime || DEFAULT_BLOCK_TIME_EST;
 }
 
-async function tryFetchChainLatestBlock(chainId: number) {
-  if (!chainId) return null;
-  console.debug(`Attempting to fetch latest block for:`, chainId);
+async function tryFetchChainLatestBlock(domainId: number, multiProvider: MultiProvider) {
+  const metadata = multiProvider.tryGetChainMetadata(domainId);
+  if (!metadata) return null;
+  console.debug(`Attempting to fetch latest block for:`, metadata.name);
   try {
-    const block = await queryExplorerForBlock(chainId, 'latest');
+    const block = await queryExplorerForBlock(metadata.name, multiProvider, 'latest');
     return block;
   } catch (error) {
     console.error('Error fetching latest block', error);
@@ -152,9 +165,14 @@ async function tryFetchChainLatestBlock(chainId: number) {
   }
 }
 
-async function tryFetchLatestNonce(chainId: number, explorerApiUrl: string) {
-  if (!chainId) return null;
-  console.debug(`Attempting to fetch nonce for:`, chainId);
+async function tryFetchLatestNonce(
+  domainId: number,
+  multiProvider: MultiProvider,
+  explorerApiUrl: string,
+) {
+  const metadata = multiProvider.tryGetChainMetadata(domainId);
+  if (!metadata) return null;
+  console.debug(`Attempting to fetch nonce for:`, metadata.name);
   try {
     const response = await fetchWithTimeout(
       `${explorerApiUrl}/latest-nonce`,
@@ -163,7 +181,7 @@ async function tryFetchLatestNonce(chainId: number, explorerApiUrl: string) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ chainId }),
+        body: JSON.stringify({ chainId: metadata.chainId }),
       },
       3000,
     );

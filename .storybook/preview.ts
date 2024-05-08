@@ -1,3 +1,5 @@
+import '../src/styles.css';
+
 const preview = {
   parameters: {
     actions: { argTypesRegex: '^on[A-Z].*' },

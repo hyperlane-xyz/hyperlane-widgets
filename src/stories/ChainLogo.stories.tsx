@@ -1,6 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import { GithubRegistry } from '@hyperlane-xyz/registry';
+
 import { ChainLogo } from '../icons/ChainLogo.js';
 
 export default {
@@ -10,54 +12,45 @@ export default {
 
 const Template: ComponentStory<typeof ChainLogo> = (args) => <ChainLogo {...args} />;
 
-export const ColorChain = Template.bind({});
-ColorChain.args = {
-  chainId: 1,
-  color: true,
+const registry = new GithubRegistry();
+
+export const ChainNoBackground = Template.bind({});
+ChainNoBackground.args = {
+  chainName: 'ethereum',
   background: false,
+  registry,
 };
 
-export const NoColorChain = Template.bind({});
-NoColorChain.args = {
-  chainId: 1,
-  color: false,
-  background: false,
-};
-
-export const BackgroundColorChain = Template.bind({});
-BackgroundColorChain.args = {
-  chainId: 1,
-  color: true,
+export const ChainWithBackground = Template.bind({});
+ChainWithBackground.args = {
+  chainName: 'ethereum',
   background: true,
+  registry,
 };
 
-export const BackgroundNoColorChain = Template.bind({});
-BackgroundNoColorChain.args = {
-  chainId: 1,
-  color: false,
+export const ChainWithBigSize = Template.bind({});
+ChainWithBigSize.args = {
+  chainName: 'ethereum',
+  size: 100,
+  registry,
+};
+
+export const ChainWithBackgrounAndBig = Template.bind({});
+ChainWithBackgrounAndBig.args = {
+  chainName: 'ethereum',
+  size: 100,
   background: true,
+  registry,
 };
 
 export const JustChainName = Template.bind({});
 JustChainName.args = {
-  chainName: 'Ethereum',
+  chainName: 'ethereum',
+  registry,
 };
 
-export const JustChainId = Template.bind({});
-JustChainId.args = {
-  chainId: 422220,
+export const FakeChainName = Template.bind({});
+FakeChainName.args = {
+  chainName: 'myfakechain',
+  registry,
 };
-
-export const ChainIdAndName = Template.bind({});
-ChainIdAndName.args = {
-  chainName: 'DopeChain',
-  chainId: 422220,
-};
-
-export const ChainIdString = Template.bind({});
-ChainIdAndName.args = {
-  chainId: 'injective-1',
-};
-
-export const NoIdNoName = Template.bind({});
-NoIdNoName.args = {};

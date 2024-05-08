@@ -1,4 +1,4 @@
-import { chainIdToMetadata } from '@hyperlane-xyz/sdk';
+import type { MultiProvider } from '@hyperlane-xyz/sdk';
 
 import { fetchWithTimeout } from './timeout.js';
 
@@ -8,32 +8,22 @@ export interface ExplorerQueryResponse<R> {
   result: R;
 }
 
-export function getExplorerUrl(chainId: number) {
-  const chain = chainIdToMetadata[chainId];
-  if (!chain?.blockExplorers?.length) return null;
-  return chain.blockExplorers[0].url;
-}
-
-export function getExplorerApiUrl(chainId: number) {
-  const chain = chainIdToMetadata[chainId];
-  if (!chain?.blockExplorers?.length) return null;
-  return chain.blockExplorers[0].apiUrl || chain.blockExplorers[0].url;
-}
-
-export function getTxExplorerUrl(chainId: number, hash?: string) {
-  const baseUrl = getExplorerUrl(chainId);
-  if (!hash || !baseUrl) return null;
-  return `${baseUrl}/tx/${hash}`;
+export async function getExplorerApiUrl(chainName: string, multiProvider: MultiProvider) {
+  const metadata = await multiProvider.getChainMetadata(chainName);
+  const blockExplorers = metadata?.blockExplorers;
+  if (!blockExplorers?.length) return null;
+  return blockExplorers[0].apiUrl || blockExplorers[0].url;
 }
 
 export async function queryExplorer<P>(
-  chainId: number,
+  chainName: string,
+  multiProvider: MultiProvider,
   path: string,
   apiKey?: string,
   timeout?: number,
 ) {
-  const baseUrl = getExplorerApiUrl(chainId);
-  if (!baseUrl) throw new Error(`No URL found for explorer for chain ${chainId}`);
+  const baseUrl = getExplorerApiUrl(chainName, multiProvider);
+  if (!baseUrl) throw new Error(`No URL found for explorer for chain ${chainName}`);
 
   let url = `${baseUrl}/${path}`;
   console.debug('Querying explorer url:', url);
@@ -68,11 +58,15 @@ interface PartialBlock {
   nonce: string;
 }
 
-export async function queryExplorerForBlock(chainId: number, blockNumber?: number | string) {
+export async function queryExplorerForBlock(
+  chainName: string,
+  multiProvider: MultiProvider,
+  blockNumber?: number | string,
+) {
   const path = `?module=proxy&action=eth_getBlockByNumber&tag=${
     blockNumber || 'latest'
   }&boolean=false`;
-  const block = await queryExplorer<PartialBlock>(chainId, path);
+  const block = await queryExplorer<PartialBlock>(chainName, multiProvider, path);
   if (!block?.number || parseInt(block.number.toString()) < 0) {
     const msg = 'Invalid block result';
     console.error(msg, JSON.stringify(block), path);

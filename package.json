@@ -1,15 +1,17 @@
 {
   "name": "@hyperlane-xyz/widgets",
   "description": "Common react components for Hyperlane projects",
-  "version": "3.8.0",
+  "version": "3.11.0",
   "author": "J M Rossy",
   "peerDependencies": {
-    "@hyperlane-xyz/sdk": "^3.8",
     "react": "^18",
     "react-dom": "^18"
   },
+  "dependencies": {
+    "@hyperlane-xyz/registry": "1.1.0"
+  },
   "devDependencies": {
-    "@hyperlane-xyz/sdk": "3.8.0",
+    "@hyperlane-xyz/sdk": "^3.11.1",
     "@storybook/addon-essentials": "^7.6.14",
     "@storybook/addon-interactions": "^7.6.14",
     "@storybook/addon-links": "^7.6.14",
@@ -64,10 +66,9 @@
     "url": "https://github.com/hyperlane-xyz/hyperlane-widgets"
   },
   "scripts": {
-    "build": "yarn build:svg && yarn build:ts && yarn build:css",
+    "build": "yarn build:ts && yarn build:css",
     "build:ts": "tsc",
     "build:css": "tailwindcss -c ./tailwind.config.cjs -i ./src/styles.css -o ./dist/styles.css --minify",
-    "build:svg": "svgr --typescript --no-index --out-dir src/logos -- node_modules/@hyperlane-xyz/sdk/logos",
     "clean": "rm -rf dist cache",
     "lint": "eslint . --ext .ts",
     "prettier": "prettier --write ./src",

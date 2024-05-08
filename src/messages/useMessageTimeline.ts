@@ -1,8 +1,11 @@
+import type { MultiProvider } from '@hyperlane-xyz/sdk';
+
 import { useMessage } from './useMessage.js';
 import { useMessageStage } from './useMessageStage.js';
 
 interface Params {
   messageId?: string;
+  multiProvider: MultiProvider;
   originTxHash?: string;
   explorerApiUrl?: string;
   retryInterval?: number;
@@ -15,7 +18,11 @@ export function useMessageTimeline(params: Params) {
     timings,
     error: stageError,
     isLoading: isStageLoading,
-  } = useMessageStage({ message, retryInterval: params.retryInterval });
+  } = useMessageStage({
+    message,
+    multiProvider: params.multiProvider,
+    retryInterval: params.retryInterval,
+  });
   return {
     message,
     stage,
