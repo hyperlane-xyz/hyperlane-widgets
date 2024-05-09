@@ -1,4 +1,4 @@
-import React, { ReactElement, memo, useEffect, useState } from 'react';
+import React, { ReactElement, useEffect, useState } from 'react';
 
 import { IRegistry } from '@hyperlane-xyz/registry';
 
@@ -15,20 +15,25 @@ export interface ChainLogoProps {
   Icon?: SvgIcon; // Override the default set used above. Necessary for PI chain logos.
 }
 
-function _ChainLogo({ chainName, registry, size = 32, background = false, Icon }: ChainLogoProps) {
+export function ChainLogo({
+  chainName,
+  registry,
+  size = 32,
+  background = false,
+  Icon,
+}: ChainLogoProps) {
   const title = chainName || 'Unknown';
-  const bgColorSeed = chainName.charCodeAt(0);
-  console.log('bgColorSeed', bgColorSeed);
+  const bgColorSeed = title.charCodeAt(0);
   const iconSize = Math.floor(size / 1.9);
 
   const [svgLogo, setSvgLogo] = useState('');
   useEffect(() => {
-    if (!chainName || Icon) return;
+    if (!chainName || svgLogo || Icon) return;
     registry
       .getChainLogoUri(chainName)
       .then((uri) => uri && setSvgLogo(uri))
       .catch((err) => console.error(err));
-  }, []);
+  }, [chainName, registry, svgLogo, Icon]);
 
   if (!svgLogo) {
     return (
@@ -60,5 +65,3 @@ function _ChainLogo({ chainName, registry, size = 32, background = false, Icon }
     );
   }
 }
-
-export const ChainLogo = memo(_ChainLogo);
