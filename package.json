@@ -8,7 +8,7 @@
     "react-dom": "^18"
   },
   "dependencies": {
-    "@hyperlane-xyz/registry": "1.1.0"
+    "@hyperlane-xyz/registry": "1.1.2"
   },
   "devDependencies": {
     "@hyperlane-xyz/sdk": "^3.11.1",

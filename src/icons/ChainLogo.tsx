@@ -12,7 +12,7 @@ export interface ChainLogoProps {
   registry: IRegistry;
   size?: number;
   background?: boolean;
-  Icon?: SvgIcon; // Override the default set used above. Necessary for PI chain logos.
+  Icon?: SvgIcon; // Optional override for the logo in the registry
 }
 
 export function ChainLogo({
