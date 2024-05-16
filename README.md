@@ -32,4 +32,4 @@ This package requires `@hyperlane-xyz/sdk`, `react`, and `react-dom`.
 
 ## Learn more
 
-For more information, see the [Hyperlane documentation](https://docs.hyperlane.xyz/hyperlane-docs/developers/getting-started).
+For more information, see the [Hyperlane documentation](https://docs.hyperlane.xyz/docs/intro).
