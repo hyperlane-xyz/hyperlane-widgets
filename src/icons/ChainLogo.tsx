@@ -1,6 +1,6 @@
 import React, { ReactElement, useEffect, useState } from 'react';
 
-import { IRegistry } from '@hyperlane-xyz/registry';
+import type { IRegistry } from '@hyperlane-xyz/registry';
 
 import { Circle } from './Circle.js';
 import { QuestionMarkIcon } from './QuestionMark.js';
@@ -26,16 +26,18 @@ export function ChainLogo({
   const bgColorSeed = title.charCodeAt(0);
   const iconSize = Math.floor(size / 1.9);
 
-  const [svgLogo, setSvgLogo] = useState('');
+  const [svgLogos, setSvgLogos] = useState({});
   useEffect(() => {
-    if (!chainName || svgLogo || Icon) return;
+    if (!chainName || svgLogos[chainName] || Icon) return;
     registry
       .getChainLogoUri(chainName)
-      .then((uri) => uri && setSvgLogo(uri))
+      .then((uri) => uri && setSvgLogos({ ...svgLogos, [chainName]: uri }))
       .catch((err) => console.error(err));
-  }, [chainName, registry, svgLogo, Icon]);
+  }, [chainName, registry, svgLogos, Icon]);
 
-  if (!svgLogo) {
+  const logoUri = svgLogos[chainName];
+
+  if (!logoUri) {
     return (
       <Circle size={size} title={title} bgColorSeed={bgColorSeed}>
         {chainName ? (
@@ -53,7 +55,7 @@ export function ChainLogo({
         {Icon ? (
           <Icon width={iconSize} height={iconSize} title={title} />
         ) : (
-          <img src={svgLogo} alt={title} width={iconSize} height={iconSize} />
+          <img src={logoUri} alt={title} width={iconSize} height={iconSize} />
         )}
       </Circle>
     );
@@ -61,7 +63,7 @@ export function ChainLogo({
     return Icon ? (
       <Icon width={size} height={size} title={title} />
     ) : (
-      <img src={svgLogo} alt={title} width={size} height={size} />
+      <img src={logoUri} alt={title} width={size} height={size} />
     );
   }
 }
