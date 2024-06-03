@@ -1,17 +1,15 @@
 {
   "name": "@hyperlane-xyz/widgets",
   "description": "Common react components for Hyperlane projects",
-  "version": "3.11.0",
+  "version": "3.13.0",
   "author": "J M Rossy",
   "peerDependencies": {
     "react": "^18",
     "react-dom": "^18"
   },
-  "dependencies": {
-    "@hyperlane-xyz/registry": "1.1.2"
-  },
   "devDependencies": {
-    "@hyperlane-xyz/sdk": "^3.11.1",
+    "@hyperlane-xyz/registry": "2.0.0",
+    "@hyperlane-xyz/sdk": "^3.13.0",
     "@storybook/addon-essentials": "^7.6.14",
     "@storybook/addon-interactions": "^7.6.14",
     "@storybook/addon-links": "^7.6.14",
@@ -20,7 +18,6 @@
     "@storybook/react": "^7.6.14",
     "@storybook/react-vite": "^7.6.14",
     "@storybook/test": "^7.6.14",
-    "@svgr/cli": "^6.5.1",
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
     "@types/node": "^18.11.18",
     "@types/react": "^18.0.27",
