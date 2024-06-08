@@ -27,6 +27,8 @@ export function ChainLogo({
   const iconSize = Math.floor(size / 1.9);
 
   const [svgLogos, setSvgLogos] = useState({});
+  const logoUri = svgLogos[chainName];
+
   useEffect(() => {
     if (!chainName || svgLogos[chainName] || Icon) return;
     registry
@@ -35,9 +37,7 @@ export function ChainLogo({
       .catch((err) => console.error(err));
   }, [chainName, registry, svgLogos, Icon]);
 
-  const logoUri = svgLogos[chainName];
-
-  if (!logoUri) {
+  if (!logoUri && !Icon) {
     return (
       <Circle size={size} title={title} bgColorSeed={bgColorSeed}>
         {chainName ? (
