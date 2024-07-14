@@ -15,6 +15,7 @@ interface Props {
   timings: StageTimings;
   timestampSent?: number;
   hideDescriptions?: boolean;
+  externalLink?: string;
 }
 
 export function MessageTimeline({
@@ -23,6 +24,7 @@ export function MessageTimeline({
   timings,
   timestampSent,
   hideDescriptions,
+  externalLink,
 }: Props) {
   // Ignore stage value if status shows as delivered
   const stage = status === MessageStatus.Delivered ? Stage.Relayed : _stage;
@@ -32,9 +34,18 @@ export function MessageTimeline({
     ? `${timeSent.toLocaleDateString()} ${timeSent.toLocaleTimeString()}`
     : null;
 
+  const onStageClickHandler = () => {
+    if (externalLink) window.open(externalLink, '_blank', 'noreferrer');
+  };
+
   return (
     <div className="htw-pt-14 htw-pb-1 htw-flex htw-w-full">
-      <div className={styles.stageContainer}>
+      <div
+        onClick={onStageClickHandler}
+        className={`${styles.stageContainer} ${
+          externalLink ? 'htw-cursor-pointer' : 'htw-cursor-auto'
+        }`}
+      >
         <div
           className={`${styles.stageBar} htw-rounded-l ${getStageOpacityClass(
             Stage.Sent,
@@ -59,7 +70,12 @@ export function MessageTimeline({
         )}
       </div>
       <div className={styles.stageSpacer}></div>
-      <div className={styles.stageContainer}>
+      <div
+        onClick={onStageClickHandler}
+        className={`${styles.stageContainer} ${
+          externalLink ? 'htw-cursor-pointer' : 'htw-cursor-auto'
+        }`}
+      >
         <div
           className={`${styles.stageBar} ${getStageOpacityClass(Stage.Finalized, stage, status)}`}
         >
@@ -79,7 +95,12 @@ export function MessageTimeline({
         )}
       </div>
       <div className={styles.stageSpacer}></div>
-      <div className={styles.stageContainer}>
+      <div
+        onClick={onStageClickHandler}
+        className={`${styles.stageContainer} ${
+          externalLink ? 'htw-cursor-pointer' : 'htw-cursor-auto'
+        }`}
+      >
         <div
           className={`${styles.stageBar} ${getStageOpacityClass(Stage.Validated, stage, status)}`}
         >
@@ -99,7 +120,12 @@ export function MessageTimeline({
         )}
       </div>
       <div className={styles.stageSpacer}></div>
-      <div className={styles.stageContainer}>
+      <div
+        onClick={onStageClickHandler}
+        className={`${styles.stageContainer} ${
+          externalLink ? 'htw-cursor-pointer' : 'htw-cursor-auto'
+        }`}
+      >
         <div
           className={`${styles.stageBar} htw-rounded-r ${getStageOpacityClass(
             Stage.Relayed,
